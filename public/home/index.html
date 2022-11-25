@@ -15,7 +15,7 @@
       margin: var(--gap) auto;
       width: 1200px;
     }
-    h1 {
+    h2 {
       margin-bottom: 2rem;
     }
     section {
@@ -23,6 +23,7 @@
       padding: var(--gap);
       padding-left: 2rem;
       margin-bottom: 2rem;
+      overflow: hidden;
     }
     div {
       display: flex;
@@ -38,6 +39,7 @@
     .accent-border {
       border-left: var(--border);
       border-color: var(--accent-bg-color);
+      background-color: var(--accent-font-color);
     }
     .accent-button {
       background-color: var(--accent-bg-color);
@@ -46,6 +48,7 @@
     .warning-border {
       border-left: var(--border);
       border-color: var(--warning-bg-color);
+      background-color: var(--warning-font-color);
     }
     .warning-button {
       background-color: var(--warning-bg-color);
@@ -54,6 +57,7 @@
     .correct-border {
       border-left: var(--border);
       border-color: var(--correct-bg-color);
+      background-color: var(--correct-font-color);
     }
     .correct-button {
       background-color: var(--correct-bg-color);
@@ -63,12 +67,12 @@
 </head>
 <body>
   <main>
-    <h1>trey.app</h1>
+    <h2>Welcome to trey.app :)</h2>
     <section class="accent-border">
-      <h2>
+      <h4>
         Web
-        <p>Fontend Testing</p>
-      </h2>
+        <p>Frontend Testing</p>
+      </h4>
       <div>
         <a href="https://github.com/TreyTiderman" class="accent-button">github</a>
         <a href="/vanilla" class="accent-button">vanilla</a>
@@ -77,10 +81,10 @@
       </div>
     </section>
     <section class="warning-border">
-      <h2>
+      <h4>
         Home
         <p>Automation and files</p>
-      </h2>
+      </h4>
       <div>
         <a href="https://home.trey.app" class="warning-button"> home </a>
         <a href="https://home.trey.app/qbit" class="warning-button"> qbit </a>
@@ -88,10 +92,10 @@
       </div>
     </section>
     <section class="correct-border">
-      <h2>
+      <h4>
         Server
         <p>Web server and docker things</p>
-      </h2>
+      </h4>
       <div>
         <a href="https://dev.trey.app/?workspace=/home/trey/Projects/.vscode/ws.code-workspace" class="correct-button"> vscode </a>
         <a href="https://dns.trey.app/admin" class="correct-button"> dhcp/dns </a>

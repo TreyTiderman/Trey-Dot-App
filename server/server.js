@@ -132,7 +132,7 @@ app.get('/api/files', async (req, res) => {
 })
 
 // Start web server
-const port = 6969
+const port = 4201
 app.listen(port, async () => {
   console.log(`\nUI testing server is up and running on ${os.type()}.`)
   console.log(`The user interface is available at:`)
