@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>trey.app</title>
+  <link rel="stylesheet" href="/vanilla/css/base.css">
+  <style>
+    body {
+      background-color: black;
+    }
+    main {
+      padding: var(--gap);
+      margin: var(--gap) auto;
+      width: 1200px;
+    }
+    h1 {
+      margin-bottom: 2rem;
+    }
+    section {
+      border-radius: 0;
+      padding: var(--gap);
+      padding-left: 2rem;
+      margin-bottom: 2rem;
+    }
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap);
+    }
+    a {
+      padding: var(--pad);
+      border-radius: var(--radius);
+      font-weight: bolder;
+      font-family: var(--font-mono);
+    }
+    .accent-border {
+      border-left: var(--border);
+      border-color: var(--accent-bg-color);
+    }
+    .accent-button {
+      background-color: var(--accent-bg-color);
+      color: var(--accent-font-color);
+    }
+    .warning-border {
+      border-left: var(--border);
+      border-color: var(--warning-bg-color);
+    }
+    .warning-button {
+      background-color: var(--warning-bg-color);
+      color: var(--warning-font-color);
+    }
+    .correct-border {
+      border-left: var(--border);
+      border-color: var(--correct-bg-color);
+    }
+    .correct-button {
+      background-color: var(--correct-bg-color);
+      color: var(--correct-font-color);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>trey.app</h1>
+    <section class="accent-border">
+      <h2>
+        Web
+        <p>Fontend Testing</p>
+      </h2>
+      <div>
+        <a href="https://github.com/TreyTiderman" class="accent-button">github</a>
+        <a href="/vanilla" class="accent-button">vanilla</a>
+        <a href="/svelte" class="accent-button">svelte</a>
+        <a href="/api" class="accent-button">api</a>
+      </div>
+    </section>
+    <section class="warning-border">
+      <h2>
+        Home
+        <p>Automation and files</p>
+      </h2>
+      <div>
+        <a href="https://home.trey.app" class="warning-button"> home </a>
+        <a href="https://home.trey.app/qbit" class="warning-button"> qbit </a>
+        <a href="https://files.trey.app" class="warning-button"> files </a>
+      </div>
+    </section>
+    <section class="correct-border">
+      <h2>
+        Server
+        <p>Web server and docker things</p>
+      </h2>
+      <div>
+        <a href="https://dev.trey.app/?workspace=/home/trey/Projects/.vscode/ws.code-workspace" class="correct-button"> vscode </a>
+        <a href="https://dns.trey.app/admin" class="correct-button"> dhcp/dns </a>
+        <a href="https://docker.trey.app" class="correct-button"> docker </a>
+        <a href="https://proxy.trey.app" class="correct-button"> proxy </a>
+        <a href="https://test.trey.app" class="correct-button"> test </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
