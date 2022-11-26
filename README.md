@@ -1,5 +1,7 @@
 # UI Testing
 
+Anything in the public folder will be available via http
+
 ## Server
 
 1. Run the following commands in the `./server` folder
@@ -27,12 +29,25 @@ npm run dev
 ```
 sudo docker build . -t trey-dot-app
 ```
-3. Then to run the image
+3. Remove the current running container if it exists
+    - Image Name: "NAME"
+```
+sudo docker rm Trey-Dot-App
+```
+4. Then to run the image
+    - Detach: "-d" (run in background)
     - Port: "-p SERVER_PORT:CONTAINER_PORT"
     - Volume: "-v SERVER_DIRECTORY:CONTAINER_DIRECTORY"
     - Image Name: "NAME"
 ```
-sudo docker run -p 4201:4201 -v $(pwd)/public:/app/public trey-dot-app
+sudo docker run -d -p 4201:4201 -v $(pwd)/public:/app/public --restart unless-stopped --name Trey-Dot-App trey-dot-app
+```
+5. Stop / Start / Restart
+    - Image Name: "NAME"
+```
+sudo docker stop Trey-Dot-App
+sudo docker start Trey-Dot-App
+sudo docker restart Trey-Dot-App
 ```
 
 ## Kill the process
