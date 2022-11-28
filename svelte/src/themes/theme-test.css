@@ -15,7 +15,7 @@ body.test {
   --color-text-primary: #000;
   
   --filter-brightness-hover: brightness(125%);
-  --filter-brightness-diable: brightness(80%);
+  --filter-brightness-disable: brightness(80%);
   --color-highlight: hsl(265, 40%, 60%, 15%);
 
   --color-border: var(--color-header);

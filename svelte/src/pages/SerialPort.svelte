@@ -127,11 +127,11 @@
 </script>
 
 <!-- HTML -->
-<section>
+<article>
 
   <!-- Connection Settings -->
   <aside>
-    <h4>Connection Settings</h4>
+    <h2>Connection Settings</h2>
     {#if availablePorts.length === 0 && doneLoading}
       <div>
         <Icon name="circle-exclamation" size=1 color="var(--color-bg-red)"/>
@@ -191,8 +191,8 @@
   </aside>
 
   <!-- Terminal -->
-  <article>
-    <h4>Terminal</h4>
+  <section>
+    <h2>Terminal</h2>
     <Terminal lines={lines}/>
 
     <!-- Sends -->
@@ -210,52 +210,53 @@
         <button on:click={sendClick(send3)}>Send</button>
       </div>
     </div>
-  </article>
+  </section>
 
-</section>
+</article>
 
 <!-- CSS -->
 <style>
-  section {
-    /* padding: var(--gap); */
-    /* max-width: 1200px; */
+  /* Max width if wanted */
+  /* article {
+    max-width: 1200px;
     margin: auto;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    flex-wrap: wrap;
+  } */
+  article {
     height: 100%;
-    /* gap: var(--gap); */
-    align-items: flex-start;
+    overflow: auto;
+    display: flex;
   }
   aside {
+    min-width: 300px;
     padding: var(--gap);
+    border-right: var(--border);
     border-color: var(--color-header);
+
     display: grid;
     align-content: flex-start;
-    height: 100%;
     gap: var(--gap);
   }
-  article {
+  section {
+    flex-grow: 1;
     padding: var(--gap);
+
     display: grid;
     align-content: flex-start;
-    width: 100%;
-    height: 100%;
     gap: var(--gap);
   }
+
   /* If width is less than 960px */
-  @media (max-width: 960px) {
-    section {
-      grid-template-columns: 1fr;
+  @media (max-width: 800px) {
+    article {
+      display: flex;
+      flex-direction: column;
     }
     aside {
+      flex-grow: 1;
+      padding: var(--gap);
+      border-right: none;
       border-bottom: var(--border);
-    }
-  }
-  /* If width is greater than 960px */
-  @media (min-width: 960px) {
-    aside {
-      border-right: var(--border);
+      border-color: var(--color-header);
     }
   }
 

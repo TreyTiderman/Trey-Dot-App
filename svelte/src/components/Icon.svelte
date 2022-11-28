@@ -13,6 +13,7 @@
   export let width = undefined
   export let height = undefined
   export let color = "currentColor"
+  export let inline = false
 
   // SVG
   export let svgPath = undefined
@@ -33,20 +34,20 @@
 
 <!-- SVG -->
 {#if svgUsed}
-<div style="{$$props.style}">
-  <img
-    src={svgPath}
-    alt="SVG Icon"
-    onload="SVGInject(this)"
-    style="
-      width: {width ?? size}em;
-      height: {height ?? size}em;
-      fill: {color};
-      shape-rendering: optimizeSpeed;
-      shape-rendering: geometricPrecision;
-    "
-  >
-</div>
+  <div style="{$$props.style}" class="{ inline ? "inline" : ""}">
+    <img
+      src={svgPath}
+      alt="SVG Icon"
+      onload="SVGInject(this)"
+      style="
+        width: {width ?? size}em;
+        height: {height ?? size}em;
+        fill: {color};
+        shape-rendering: optimizeSpeed;
+        shape-rendering: geometricPrecision;
+      "
+    >
+  </div>
 <!-- Image | .png .jpeg .gif .jpg .ico .cur .apng -->
 {:else if imageUsed}
   <img 
@@ -63,8 +64,11 @@
 {/if}
 
 <style>
-  div {
+  span {
     display: grid;
     place-items: center;
+  }
+  .inline {
+    display: inline;
   }
 </style>

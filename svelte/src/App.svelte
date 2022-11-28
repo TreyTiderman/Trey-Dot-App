@@ -16,8 +16,14 @@
   import Dialog from './layout/Dialog.svelte'
 
   // Pages 
-  import Page from './pages/Page.svelte';
+  import TemplatePage from './pages/templates/Page.svelte';
+  import Panels_2 from './pages/templates/Panels_2.svelte';
+  
+  import OKLCH from './pages/tests/OKLCH.svelte';
+
   import Home from './pages/Home.svelte';
+  import Html from './pages/Html.svelte';
+  import Components from './pages/Components.svelte';
   import Network from './pages/Network.svelte';
   import Dhcp from './pages/Dhcp.svelte';
   import SerialPort from './pages/SerialPort.svelte';
@@ -30,60 +36,112 @@
       },
       icon: "house",
       // pageComponent: Home,
-      pageComponent: Network,
+      pageComponent: Panels_2,
     },
     {
       name: {
-        header: "Tools",
-        nav: "Tools"
+        header: "Components",
+        nav: "Components"
+      },
+      icon: "shapes",
+      pageComponent: Components,
+    },
+    {
+      name: {
+        header: "Templates",
+        nav: "Templates"
+      },
+      icon: "clipboard",
+      hideSubMenu: true,
+      subMenu: [
+        {
+          name: {
+            header: "HTML",
+            nav: "HTML"
+          },
+          icon: "html5",
+          pageComponent: Html,
+        },
+        {
+          name: {
+            header: "TemplatePage",
+            nav: "TemplatePage"
+          },
+          icon: "table-columns",
+          pageComponent: TemplatePage,
+        },
+        {
+          name: {
+            header: "Panels_2",
+            nav: "Panels_2"
+          },
+          icon: "table-columns",
+          pageComponent: Panels_2,
+        },
+      ],
+    },
+    {
+      name: {
+        header: "Tests",
+        nav: "Tests"
+      },
+      icon: "vials",
+      hideSubMenu: true,
+      subMenu: [
+        {
+          name: {
+            header: "OKLCH",
+            nav: "OKLCH"
+          },
+          icon: "palette",
+          pageComponent: OKLCH,
+        },
+      ],
+    },
+    {
+      name: {
+        header: "AV-Tools",
+        nav: "AV-Tools"
       },
       icon: "wrench",
-      hideSubMenu: false,
+      hideSubMenu: true,
       subMenu: [
-          {
-            name: {
-              header: "Network Settings",
-              nav: "Network"
-            },
-            icon: "network-wired",
-            pageComponent: Network,
+        {
+          name: {
+            header: "Network Settings",
+            nav: "Network"
           },
-          {
-            name: {
-              header: "DHCP",
-              nav: "DHCP"
-            },
-            icon: "server",
-            pageComponent: Dhcp,
+          icon: "network-wired",
+          pageComponent: Network,
+        },
+        {
+          name: {
+            header: "DHCP",
+            nav: "DHCP"
           },
-          {
-            name: {
-              header: "SerialPort",
-              nav: "SerialPort"
-            },
-            icon: "terminal",
-            pageComponent: SerialPort,
+          icon: "server",
+          pageComponent: Dhcp,
+        },
+        {
+          name: {
+            header: "SerialPort",
+            nav: "SerialPort"
           },
-        ],
-      },
+          icon: "terminal",
+          pageComponent: SerialPort,
+        },
+      ],
+    },
     {
       name: {
         header: "Settings",
         nav: "Settings"
       },
       icon: "gear",
-      pageComponent: Page,
+      pageComponent: TemplatePage,
     },
   ]
   $router.pageObj = navMenu[0]
-  // $router.pageObj = {
-  //   name: {
-  //     header: "SerialPort",
-  //     nav: "SerialPort"
-  //   },
-  //   icon: "terminal",
-  //   pageComponent: SerialPort,
-  // }
 
   $: screenWidth = document.documentElement.offsetWidth
   let navHide = true

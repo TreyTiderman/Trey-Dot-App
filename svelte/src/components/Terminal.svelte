@@ -91,13 +91,13 @@
 
   <!-- Header -->
   <div class="terminal-header">
-    <div class="terminal-col1"><Icon name="up-down" size=.8/></div>
+    <div class="terminal-col1"><Icon name="up-down" size=.8 style="display: inline;"/></div>
     <button class="terminal-col2 textButton" on:click={timePress}>
       {timeColFormat === "datetime" ? "Date Time" : "Time"}
     </button>
     <div class="terminal-col3">
-      Sent <Icon name="up-long" size=.8 color="var(--color-bg-green)"/> / 
-      Received <Icon name="down-long" size=.8 color="var(--color-bg-blue)"/>
+      Sent <Icon name="up-long" size=.8 style="display: inline;" color="var(--color-bg-green)"/> / 
+      Received <Icon name="down-long" size=.8 style="display: inline;" color="var(--color-bg-blue)"/>
     </div>
   </div>
 
@@ -108,9 +108,9 @@
 
         <!-- Col1 -->
         {#if line.wasReceived}
-          <div class="terminal-col1"><Icon name="down-long" size=.8 color="var(--color-bg-blue)"/></div>
+          <div class="terminal-col1"><Icon name="down-long" size=.8 style="display: inline;" color="var(--color-bg-blue)"/></div>
         {:else}
-          <div class="terminal-col1"><Icon name="up-long" size=.8 color="var(--color-bg-green)"/></div>
+          <div class="terminal-col1"><Icon name="up-long" size=.8 style="display: inline;" color="var(--color-bg-green)"/></div>
         {/if}
 
         <!-- Col2 -->
@@ -197,6 +197,7 @@
     background-color: transparent;
     text-align: left;
     color: currentColor;
+    border-radius: 0;
   }
   
   /* Scroll Bar */

@@ -5,27 +5,24 @@ body {
   --color-bg: hsl(220, 10%, 0%);
   --color-bg-2: hsl(220, 10%, 8%);
   --color-header: hsl(220, 10%, 10%);
-  --color-text-bright: hsl(216, 10%, 90%);
+  --color-text-bright: hsl(216, 10%, 84%);
   --color-text: hsl(220, 10%, 65%);
   --color-text-dim: hsl(220, 10%, 45%);
   
   --color-bg-secondary: hsl(220, 10%, 18%);
   --color-text-secondary: var(--color-text-bright);
 
-  --color-bg-primary: hsl(260, 85%, 60%);
-  --color-text-primary: hsl(260, 99%, 10%);
-
   --color-bg-primary: hsl(260, 50%, 32%);
   --color-text-primary: hsl(260, 99%, 94%);
   
   --filter-brightness-hover: brightness(125%);
-  --filter-brightness-diable: brightness(85%);
+  --filter-brightness-disable: brightness(60%);
   --color-highlight: hsl(220, 10%, 60%, 15%);
 
   --color-hover: hsl(220, 10%, 15%);
   --color-pressed: hsl(220, 10%, 10%);
 
-  --color-border: var(--color-header);
+  --color-border: var(--color-bg-secondary);
   --color-border-bright: var(--color-bg-secondary);
   --color-shadow: #00000099;
 
@@ -59,10 +56,10 @@ body {
 
   /* Margin, Padding, Gap */ 
   /* top | right | bottom | left */
-  --pad: 0.8rem;
+  --pad: 0.6rem;
   --gap: 1.2rem;
   --margin: var(--gap) var(--gap);
-  --padding: var(--pad) var(--pad);
+  --padding: var(--pad) calc(1.2*var(--pad));
 
   /*  Border, Border Radius, Outline */
   /* width | style | color */

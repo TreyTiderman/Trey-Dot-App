@@ -58,7 +58,7 @@
   <button on:click={() => dispatch('nav')}>
     <Icon name="bars" size=1.75 />
   </button>
-  <h4>{title}</h4>
+  <h2>{title}</h2>
   {#if headerWidth > 600}
     <div class="time">
       <span>Server Time</span>
