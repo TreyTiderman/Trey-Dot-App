@@ -33,20 +33,20 @@ body {
   --color-bg-yellow:   hsl(  60, 85%, 60%);
   --color-bg-lime:     hsl(  95, 85%, 65%);
   --color-bg-green:    hsl( 130, 85%, 60%);
-  --color-bg-cyan:     hsl( 180, 80%, 65%);
-  --color-bg-blue:     hsl( 220, 85%, 60%);
+  --color-bg-cyan:     hsl( 180, 80%, 55%);
+  --color-bg-blue:     hsl( 220, 95%, 65%);
   --color-bg-purple:   hsl( 260, 90%, 65%);
   --color-bg-pink:     hsl( 315, 65%, 70%);
-  --color-text-grey:   hsl( 220, 10%,  5%);
-  --color-text-red:    hsl(   5, 99%,  5%);
-  --color-text-orange: hsl(  30, 99%,  5%);
-  --color-text-yellow: hsl(  60, 99%,  5%);
-  --color-text-lime:   hsl(  90, 99%,  5%);
-  --color-text-green:  hsl( 130, 99%,  5%);
-  --color-text-cyan:   hsl( 180, 99%,  5%);
-  --color-text-blue:   hsl( 220, 99%,  5%);
-  --color-text-purple: hsl( 260, 99%,  5%);
-  --color-text-pink:   hsl( 315, 99%,  5%);
+  --color-text-grey:   hsl( 220, 10%,  4%);
+  --color-text-red:    hsl(   5, 99%,  4%);
+  --color-text-orange: hsl(  30, 99%,  4%);
+  --color-text-yellow: hsl(  60, 99%,  4%);
+  --color-text-lime:   hsl(  90, 99%,  4%);
+  --color-text-green:  hsl( 130, 99%,  4%);
+  --color-text-cyan:   hsl( 180, 99%,  4%);
+  --color-text-blue:   hsl( 220, 99%,  4%);
+  --color-text-purple: hsl( 260, 99%,  4%);
+  --color-text-pink:   hsl( 315, 99%,  4%);
 
   /* Text */
   --font-text: 'Open Sans', helvetica, arial, sans-serif;
@@ -56,7 +56,7 @@ body {
 
   /* Margin, Padding, Gap */ 
   /* top | right | bottom | left */
-  --pad: 0.6rem;
+  --pad: 0.7rem;
   --gap: 1.2rem;
   --margin: var(--gap) var(--gap);
   --padding: var(--pad) calc(1.2*var(--pad));

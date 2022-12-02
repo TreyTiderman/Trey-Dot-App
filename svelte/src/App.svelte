@@ -24,9 +24,19 @@
   import Home from './pages/Home.svelte';
   import Html from './pages/Html.svelte';
   import Components from './pages/Components.svelte';
-  import Network from './pages/Network.svelte';
-  import Dhcp from './pages/Dhcp.svelte';
-  import SerialPort from './pages/SerialPort.svelte';
+
+  import Network from './pages/av-tools/Network.svelte';
+  import SetIP from './pages/av-tools/SetIP.svelte'
+  import Dhcp from './pages/av-tools/Dhcp.svelte';
+  import SerialPort from './pages/av-tools/SerialPort.svelte';
+
+  $router.dialogObj = {
+    name: {
+      header: "Network Settings",
+      nav: "Network Settings"
+    },
+    pageComponent: SetIP,
+  }
 
   let navMenu = [
     {
@@ -36,7 +46,7 @@
       },
       icon: "house",
       // pageComponent: Home,
-      pageComponent: Panels_2,
+      pageComponent: Network,
     },
     {
       name: {
@@ -151,7 +161,7 @@
 </script>
 
 <!-- HTML -->
-<Dialog pageObj={$router.dialogObj}/>
+<Dialog pageObj={$router.dialogObj} title={$router.dialogObj?.name.header}/>
 <Header
   title={$router.pageObj?.name.header}
   on:nav={() => navHide = !navHide}

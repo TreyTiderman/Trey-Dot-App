@@ -1,0 +1,1 @@
+import{S as o,i,s as l,e as c,b as r,f,B as t,n as u}from"./index.c4c2aa46.js";function _(n){let e;return{c(){e=c("section"),e.innerHTML="<h1>Page Not Found</h1>",r(e,"class","svelte-1xsqcfo")},m(s,a){f(s,e,a)},p:t,i:t,o:t,d(s){s&&u(e)}}}class p extends o{constructor(e){super(),i(this,e,null,_,l,{})}}export{p as default};

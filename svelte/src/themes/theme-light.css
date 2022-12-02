@@ -16,7 +16,7 @@ body.light {
   --color-bg-primary: hsl(265, 80%, 75%);
   --color-text-primary: hsl(265, 90%, 10%);
 
---filter-brightness-hover: brightness(90%);
+  --filter-brightness-hover: brightness(90%);
   --filter-brightness-disable: brightness(70%);
   --color-highlight: hsl(220, 0%, 60%, 15%);
 
@@ -31,7 +31,7 @@ body.light {
   --color-bg-grey:     hsl( 220, 80%, 75%);
   --color-bg-red:      hsl(   5, 80%, 75%);
   --color-bg-orange:   hsl(  30, 80%, 75%);
-  --color-bg-yellow:   hsl(  60, 80%, 75%);
+  --color-bg-yellow:   hsl(  60, 75%, 65%);
   --color-bg-lime:     hsl(  90, 80%, 75%);
   --color-bg-green:    hsl( 130, 80%, 75%);
   --color-bg-cyan:     hsl( 180, 80%, 75%);
@@ -50,7 +50,6 @@ body.light {
   --color-text-pink:   hsl( 315, 99%,  5%);
 
   /* Text */
-  --font-size: 16px;
   --font-text: 'Open Sans', -apple-system, BlinkMacSystemFont, helvetica, arial, sans-serif;
   --font-mono: 'Fira Code', Menlo, Consolas, monospace;
   --line-height: 1.75;
@@ -58,7 +57,7 @@ body.light {
 
   /* Margin, Padding, Gap */ 
   /* top | right | bottom | left */
-  --pad: 0.8rem;
+  --pad: 0.7rem;
   --gap: 1.2rem;
   --margin: var(--gap) var(--gap);
   --padding: var(--pad) var(--pad);

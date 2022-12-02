@@ -32,10 +32,18 @@
     padding: var(--gap);
     border-right: var(--border);
     border-color: var(--color-header);
+
+    display: grid;
+    align-content: flex-start;
+    gap: var(--gap);
   }
   section {
     flex-grow: 1;
     padding: var(--gap);
+
+    display: grid;
+    align-content: flex-start;
+    gap: var(--gap);
   }
 
   @media (max-width: 800px) {

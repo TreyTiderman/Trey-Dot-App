@@ -4,7 +4,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/02XAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARERERERERARERERERERERERERABEREREREREAEREREREREQARERERERERABEREREREREAEREREREREQARERERERERABEREREREREAEREREREREQAREREREQAAAAAAERERAAAAAAARERERERERERERERERERERERARERERERERCAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAA" type="image/x-icon"/>
   <title>trey.app</title>
+  <meta name="description" content="trey.app">
+
+  <!-- PWA stuff -->
+  <script src="./home/sw.js"></script>
+  <script src="./home/pwa/sw-start.js"></script>
+  <link rel="manifest" href="./home/manifest.json">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" sizes="192x192" href="./home/pwa/icons/icon-192x192.png">
+
   <link rel="stylesheet" href="/vanilla/css/base.css">
   <style>
     body {
@@ -65,6 +77,7 @@
       color: var(--correct-font-color);
     }
   </style>
+
 </head>
 <body>
   <main>
@@ -78,6 +91,7 @@
         <a href="https://github.com/TreyTiderman" class="accent-button">github</a>
         <a href="/vanilla" class="accent-button">vanilla</a>
         <a href="/svelte" class="accent-button">svelte</a>
+        <a href="/tp" class="accent-button">tp</a>
         <a href="/api" class="accent-button">api</a>
       </div>
     </section>

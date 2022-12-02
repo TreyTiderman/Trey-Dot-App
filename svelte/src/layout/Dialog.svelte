@@ -16,9 +16,9 @@
   let isDown
   var mousePositionStart
   let mousePositionOffset
-  let sectionTranslate = {x: 0, y: 0}
+  let mainTranslate = {x: 0, y: 0}
   let dialogElement
-  let sectionElement
+  let mainElement
 
   // Functions
   export function close() {
@@ -33,7 +33,7 @@
       x: event.clientX,
       y: event.clientY,
     }
-    let transformString = sectionElement.style.transform
+    let transformString = mainElement.style.transform
     if (transformString === "") transformString = "0, 0"
     transformString = transformString
       .replace('translate(','')
@@ -41,7 +41,7 @@
       .replace('px','')
       .replace(')','')
       .split(',')
-    sectionTranslate = {
+    mainTranslate = {
       x: Number(transformString[0]),
       y: Number(transformString[1]),
     }
@@ -53,10 +53,10 @@
     event.preventDefault()
     if (isDown) {
       mousePositionOffset = {
-        x : event.clientX - mousePositionStart.x + sectionTranslate.x,
-        y : event.clientY - mousePositionStart.y + sectionTranslate.y
+        x : event.clientX - mousePositionStart.x + mainTranslate.x,
+        y : event.clientY - mousePositionStart.y + mainTranslate.y
       }
-      sectionElement.style.transform = 
+      mainElement.style.transform = 
         `translate(${mousePositionOffset.x}px, ${mousePositionOffset.y}px)`
     }
   }
@@ -72,10 +72,10 @@
   on:mouseleave={mouseup}
   on:mousemove={mousemove}
 >
-  <section style={$$props.style} bind:this={sectionElement}>
-  <h4
+  <main style={$$props.style} bind:this={mainElement}>
+  <h2
     on:mousedown={mousedown}
-  >{title}</h4>
+  >{title}</h2>
   {#if closeIcon}
     <button class="dialogExit" on:click={close}>
       <Icon name="xmark"/>
@@ -117,7 +117,7 @@
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
   }
-  section {
+  main {
     position: relative;
     display: grid;
     grid-template-rows: 4rem 1fr;
@@ -128,7 +128,7 @@
     border-color: var(--color-border-bright);
     transform: translate(0px, 0px);
   }
-  h4 {
+  h2 {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -136,17 +136,18 @@
     align-items: center;
     height: 4rem;
     margin-right: 4rem;
+    width: 100%;
     padding: var(--gap);
     background-color: var(--color-header);
-    border-radius: calc(var(--radius-2)/1.24)  0 0 0;
+    border-radius: calc(var(--radius-2)/1.24) calc(var(--radius-2)/1.24) 0 0;
     border-bottom: var(--border);
     color: var(--color-text-bright);
   }
   .dialogExit {
     background-color: transparent;
     background-color: var(--color-header);
+    border-bottom: var(--border);
     color: var(--color-text);
-    border: transparent;
     line-height: 1;
     margin: 0;
     
@@ -162,5 +163,12 @@
     width: 4rem;
     padding: var(--gap);
     /* padding-bottom: calc(var(--pad)/2); */
+  }
+  /* If width is less than 800px */
+  @media (max-width: 55rem) {
+    main {
+      display: flex;
+      flex-direction: column;
+    }
   }
 </style>

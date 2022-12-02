@@ -64,11 +64,11 @@
 {/if}
 
 <style>
-  span {
+  div {
     display: grid;
     place-items: center;
   }
-  .inline {
+  div.inline {
     display: inline;
   }
 </style>
