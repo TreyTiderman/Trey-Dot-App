@@ -2,9 +2,9 @@
 <script>
 
   // Components
-  import Icon from '../components/Icon.svelte'
-  import Slider from '../components/Slider.svelte'
-  import Box from '../components/Box.svelte'
+  import Icon from '../../components/Icon.svelte'
+  import Slider from '../../components/Slider.svelte'
+  import Box from '../../components/Box.svelte'
 
 </script>
 

@@ -1,3 +1,4 @@
+<!-- Javascript -->
 <script>
 
   // Store
@@ -17,11 +18,12 @@
 
   // Pages 
   import Home from './pages/Home.svelte';
-  import Html from './pages/Html.svelte';
-  import Components from './pages/Components.svelte';
   // Templates
   import TemplatePage from './pages/templates/Page.svelte';
   import Panels_2 from './pages/templates/Panels_2.svelte';
+  import Html from './pages/templates/Html.svelte';
+  import Components from './pages/templates/Components.svelte';
+  import Theme from './pages/templates/Theme.svelte';
   // Tests
   import OKLCH from './pages/tests/OKLCH.svelte';
   import Sliders from './pages/tests/Sliders.svelte';
@@ -56,6 +58,14 @@
       },
       icon: "shapes",
       pageComponent: Components,
+    },
+    Theme: {
+      name: {
+        header: "Theme",
+        nav: "Theme"
+      },
+      icon: "palette",
+      pageComponent: Theme,
     },
     TemplatePage: {
       name: {
@@ -132,50 +142,55 @@
   }
 
   // Nav Menu
-  let navMenu = [
+  const templatesSubMenu = {
+    name: {
+      header: "Templates",
+      nav: "Templates"
+    },
+    icon: "clipboard",
+    hideSubMenu: true,
+    subMenu: [
+      $router.pageObjs.Html,
+      $router.pageObjs.Components,
+      $router.pageObjs.Theme,
+      $router.pageObjs.TemplatePage,
+      $router.pageObjs.Panels_2,
+    ],
+  }
+  const testsSubMenu = {
+    name: {
+      header: "Tests",
+      nav: "Tests"
+    },
+    icon: "vials",
+    hideSubMenu: true,
+    subMenu: [
+      $router.pageObjs.OKLCH,
+      $router.pageObjs.Sliders,
+    ],
+  }
+  const avToolsSubMenu = {
+    name: {
+      header: "AV-Tools",
+      nav: "AV-Tools"
+    },
+    icon: "wrench",
+    hideSubMenu: false,
+    subMenu: [
+      $router.pageObjs.Network,
+      $router.pageObjs.DHCP,
+      $router.pageObjs.SerialPort,
+      $router.pageObjs.SetIP,
+    ],
+  }
+  const navMenu = [
     $router.pageObjs.Home,
-    $router.pageObjs.Components,
-    {
-      name: {
-        header: "Templates",
-        nav: "Templates"
-      },
-      icon: "clipboard",
-      hideSubMenu: true,
-      subMenu: [
-        $router.pageObjs.Html,
-        $router.pageObjs.TemplatePage,
-        $router.pageObjs.Panels_2,
-      ],
-    },
-    {
-      name: {
-        header: "Tests",
-        nav: "Tests"
-      },
-      icon: "vials",
-      hideSubMenu: true,
-      subMenu: [
-        $router.pageObjs.OKLCH,
-        $router.pageObjs.Sliders,
-      ],
-    },
-    {
-      name: {
-        header: "AV-Tools",
-        nav: "AV-Tools"
-      },
-      icon: "wrench",
-      hideSubMenu: false,
-      subMenu: [
-        $router.pageObjs.Network,
-        $router.pageObjs.DHCP,
-        $router.pageObjs.SerialPort,
-        $router.pageObjs.SetIP,
-      ],
-    },
+    templatesSubMenu,
+    testsSubMenu,
+    avToolsSubMenu,
     $router.pageObjs.Settings,
   ]
+  
   $router.pageObj = navMenu[0]
   $router.pageObj = $router.pageObjs.Network
   $router.dialogObj = undefined

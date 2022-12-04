@@ -2,7 +2,7 @@
 <script>
 
   // Import Components
-  import Icon from '../components/Icon.svelte'
+  import Icon from '../../components/Icon.svelte'
 
 </script>
 
