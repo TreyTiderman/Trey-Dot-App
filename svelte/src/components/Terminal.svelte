@@ -20,7 +20,7 @@
   
   // Time Column
   $: timeColFormat = terminalElementWidth > 600 ? "time" : "timeShort"
-  $: timeColWidth = terminalElementWidth > 600 ? "6.75rem" : "3.25rem"
+  $: timeColWidth = terminalElementWidth > 600 ? "6.75rem" : "4rem"
   function timePress() {
     if (timeColFormat === "datetime") {
       timeColFormat = "time"
@@ -28,7 +28,7 @@
     }
     else if (timeColFormat === "time") {
       timeColFormat = "timeShort"
-      timeColWidth = "3.25rem"
+      timeColWidth = "4rem"
     }
     else {
       timeColFormat = "datetime"
@@ -94,6 +94,7 @@
     <div class="terminal-col1"><Icon name="up-down" size=.8 style="display: inline;"/></div>
     <button class="terminal-col2 textButton" on:click={timePress}>
       {timeColFormat === "datetime" ? "Date Time" : "Time"}
+      <Icon name="arrows-rotate" size=.8 style="display: inline;" color="var(--color-text-dim)"/>
     </button>
     <div class="terminal-col3">
       Sent <Icon name="up-long" size=.8 style="display: inline;" color="var(--color-bg-green)"/> / 

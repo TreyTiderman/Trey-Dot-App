@@ -15,6 +15,7 @@
   let time
   let onlineWithServer = false
   let headerWidth
+  const iconSize = 1.5
 
   // Component Startup
   import { onMount } from 'svelte';
@@ -56,7 +57,7 @@
 <!-- HTML -->
 <header bind:offsetWidth={headerWidth}>
   <button on:click={() => dispatch('nav')}>
-    <Icon name="bars" size=1.75 />
+    <Icon name="bars" size={iconSize} />
   </button>
   <h2>{title}</h2>
   {#if headerWidth > 600}
@@ -65,7 +66,7 @@
       <pre>{time} {date}</pre>
     </div>
     <button on:click={() => theme = theme === "dark" ? "light" : "dark"}>
-      <Icon name="circle-half-stroke" size=1.75 />
+      <Icon name="circle-half-stroke" size={iconSize} />
     </button>
   {/if}
 </header>

@@ -17,6 +17,7 @@ body.light {
   --color-text-primary: hsl(265, 90%, 10%);
 
   --filter-brightness-hover: brightness(90%);
+  --filter-brightness-hover: brightness(120%);
   --filter-brightness-disable: brightness(70%);
   --color-highlight: hsl(220, 0%, 60%, 15%);
 
@@ -31,7 +32,7 @@ body.light {
   --color-bg-grey:     hsl( 220, 80%, 75%);
   --color-bg-red:      hsl(   5, 80%, 75%);
   --color-bg-orange:   hsl(  30, 80%, 75%);
-  --color-bg-yellow:   hsl(  60, 75%, 65%);
+  --color-bg-yellow:   hsl(  60, 55%, 70%);
   --color-bg-lime:     hsl(  90, 80%, 75%);
   --color-bg-green:    hsl( 130, 80%, 75%);
   --color-bg-cyan:     hsl( 180, 80%, 75%);

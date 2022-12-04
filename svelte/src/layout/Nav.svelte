@@ -110,4 +110,8 @@
       bottom: 0;
     }
   }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-bg-secondary);
+  }
 </style>

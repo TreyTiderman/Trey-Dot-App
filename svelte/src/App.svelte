@@ -16,39 +16,40 @@
   import Dialog from './layout/Dialog.svelte'
 
   // Pages 
-  import TemplatePage from './pages/templates/Page.svelte';
-  import Panels_2 from './pages/templates/Panels_2.svelte';
-  
-  import OKLCH from './pages/tests/OKLCH.svelte';
-
   import Home from './pages/Home.svelte';
   import Html from './pages/Html.svelte';
   import Components from './pages/Components.svelte';
-
+  // Templates
+  import TemplatePage from './pages/templates/Page.svelte';
+  import Panels_2 from './pages/templates/Panels_2.svelte';
+  // Tests
+  import OKLCH from './pages/tests/OKLCH.svelte';
+  import Sliders from './pages/tests/Sliders.svelte';
+  // AV-Tools
   import Network from './pages/av-tools/Network.svelte';
   import SetIP from './pages/av-tools/SetIP.svelte'
   import Dhcp from './pages/av-tools/Dhcp.svelte';
   import SerialPort from './pages/av-tools/SerialPort.svelte';
 
-  $router.dialogObj = {
-    name: {
-      header: "Network Settings",
-      nav: "Network Settings"
-    },
-    pageComponent: SetIP,
-  }
-
-  let navMenu = [
-    {
+  // All available pages
+  $router.pageObjs = {
+    Home: {
       name: {
         header: "Home",
         nav: "Home"
       },
       icon: "house",
-      // pageComponent: Home,
-      pageComponent: Network,
+      pageComponent: Home,
     },
-    {
+    Html: {
+      name: {
+        header: "HTML",
+        nav: "HTML"
+      },
+      icon: "html5",
+      pageComponent: Html,
+    },
+    Components: {
       name: {
         header: "Components",
         nav: "Components"
@@ -56,6 +57,84 @@
       icon: "shapes",
       pageComponent: Components,
     },
+    TemplatePage: {
+      name: {
+        header: "TemplatePage",
+        nav: "TemplatePage"
+      },
+      icon: "table-columns",
+      pageComponent: TemplatePage,
+    },
+    Panels_2: {
+      name: {
+        header: "Panels_2",
+        nav: "Panels_2"
+      },
+      icon: "table-columns",
+      pageComponent: Panels_2,
+    },
+    OKLCH: {
+      name: {
+        header: "OKLCH",
+        nav: "OKLCH"
+      },
+      icon: "palette",
+      pageComponent: OKLCH,
+    },
+    Sliders: {
+      name: {
+        header: "Sliders",
+        nav: "Sliders"
+      },
+      icon: "sliders",
+      pageComponent: Sliders,
+    },
+    Network: {
+      name: {
+        header: "Network",
+        nav: "Network"
+      },
+      icon: "network-wired",
+      pageComponent: Network,
+    },
+    DHCP: {
+      name: {
+        header: "DHCP",
+        nav: "DHCP"
+      },
+      icon: "server",
+      pageComponent: Dhcp,
+    },
+    SerialPort: {
+      name: {
+        header: "SerialPort",
+        nav: "SerialPort"
+      },
+      icon: "terminal",
+      pageComponent: SerialPort,
+    },
+    SetIP: {
+      name: {
+        header: "Set IP Address",
+        nav: "Set IP Address"
+      },
+      icon: "ethernet",
+      pageComponent: SetIP,
+    },
+    Settings: {
+      name: {
+        header: "Settings",
+        nav: "Settings"
+      },
+      icon: "gear",
+      pageComponent: TemplatePage,
+    },
+  }
+
+  // Nav Menu
+  let navMenu = [
+    $router.pageObjs.Home,
+    $router.pageObjs.Components,
     {
       name: {
         header: "Templates",
@@ -64,30 +143,9 @@
       icon: "clipboard",
       hideSubMenu: true,
       subMenu: [
-        {
-          name: {
-            header: "HTML",
-            nav: "HTML"
-          },
-          icon: "html5",
-          pageComponent: Html,
-        },
-        {
-          name: {
-            header: "TemplatePage",
-            nav: "TemplatePage"
-          },
-          icon: "table-columns",
-          pageComponent: TemplatePage,
-        },
-        {
-          name: {
-            header: "Panels_2",
-            nav: "Panels_2"
-          },
-          icon: "table-columns",
-          pageComponent: Panels_2,
-        },
+        $router.pageObjs.Html,
+        $router.pageObjs.TemplatePage,
+        $router.pageObjs.Panels_2,
       ],
     },
     {
@@ -98,14 +156,8 @@
       icon: "vials",
       hideSubMenu: true,
       subMenu: [
-        {
-          name: {
-            header: "OKLCH",
-            nav: "OKLCH"
-          },
-          icon: "palette",
-          pageComponent: OKLCH,
-        },
+        $router.pageObjs.OKLCH,
+        $router.pageObjs.Sliders,
       ],
     },
     {
@@ -114,47 +166,23 @@
         nav: "AV-Tools"
       },
       icon: "wrench",
-      hideSubMenu: true,
+      hideSubMenu: false,
       subMenu: [
-        {
-          name: {
-            header: "Network Settings",
-            nav: "Network"
-          },
-          icon: "network-wired",
-          pageComponent: Network,
-        },
-        {
-          name: {
-            header: "DHCP",
-            nav: "DHCP"
-          },
-          icon: "server",
-          pageComponent: Dhcp,
-        },
-        {
-          name: {
-            header: "SerialPort",
-            nav: "SerialPort"
-          },
-          icon: "terminal",
-          pageComponent: SerialPort,
-        },
+        $router.pageObjs.Network,
+        $router.pageObjs.DHCP,
+        $router.pageObjs.SerialPort,
+        $router.pageObjs.SetIP,
       ],
     },
-    {
-      name: {
-        header: "Settings",
-        nav: "Settings"
-      },
-      icon: "gear",
-      pageComponent: TemplatePage,
-    },
+    $router.pageObjs.Settings,
   ]
   $router.pageObj = navMenu[0]
+  $router.pageObj = $router.pageObjs.Network
+  $router.dialogObj = undefined
+  // $router.dialogObj = $router.pageObjs.SetIP
 
   $: screenWidth = document.documentElement.offsetWidth
-  let navHide = true
+  let navHide = document.documentElement.offsetWidth > 1200 ? false : true
 
   $: console.log("$router", $router)
 

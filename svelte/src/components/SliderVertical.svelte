@@ -35,23 +35,31 @@
       {value} {units}
     </output>
   </label>
-  <input
-    type="range" 
-    id={id}
-    max={max}
-    min={min}
-    disabled={disabled}
-    style="background: {background}"
-    bind:value={value}
-    on:input
-  >
+  <div class="rotation-wrapper-outer">
+    <div class="rotation-wrapper-inner">
+      <input
+        type="range" 
+        id={id}
+        max={max}
+        min={min}
+        disabled={disabled}
+        class="element-to-rotate"
+        style="background: {background}"
+        bind:value={value}
+        on:input
+      >
+    </div>
+  </div>
 </div>
 
 <!-- CSS -->
 <style>
+  div {
+    border: 1px solid red;
+  }
   input[type=range] {
     -webkit-appearance: none;
-    width: 100%;
+    /* width: 100%; */
     min-width: 150px;
     height: var(--gap);
     margin: calc(var(--gap)*1.25) 0 var(--pad) 0;
@@ -89,5 +97,20 @@
   }
   output {
     margin-left: auto;
+  }
+
+  .rotation-wrapper-outer {
+    display: table;
+  }
+  .rotation-wrapper-inner {
+    padding: 50% 0;
+    height: 0;
+  }
+  .element-to-rotate {
+    display: block;
+    transform-origin: top left;
+    /* Note: for a CLOCKWISE rotation, use the commented-out transform instead of this one. */
+    transform: rotate(-90deg) translate(-100%);
+    /* transform: rotate(90deg) translate(0, -100%); */
   }
 </style>

@@ -53,12 +53,12 @@
       </label>
     </div>
     <div class="buttons">
-      <button on:click={actionSet}>
+      <button on:click={actionSet} class="green">
         Set 
         <Icon name="check" size=1/>
       </button>
-      <button on:click={actionNew}>
-        New 
+      <button on:click={actionNew} class="cyan">
+        Save 
         <Icon name="square-plus" size=1/>
       </button>
     </div>
@@ -76,6 +76,7 @@
     gap: var(--gap);
     padding: var(--gap);
     width: fit-content;
+    align-content: flex-start;
   }
   .ip, .dns {
     display: grid;
@@ -96,13 +97,13 @@
     gap: var(--pad);
     flex: 1 0 0%;
   }
-  .buttons button:nth-child(1) {
-    color: var(--color-text-green);
-    background-color: var(--color-bg-green);
-  }
-  .buttons button:nth-child(2) {
-    color: var(--color-text-cyan);
+  .cyan {
     background-color: var(--color-bg-cyan);
+    color: var(--color-text-cyan);
+  }
+  .green {
+    background-color: var(--color-bg-green);
+    color: var(--color-text-green);
   }
 
   input {
