@@ -277,24 +277,45 @@
     <!-- NIC Info -->
     <div class="nicInfo">
       <div class="brightBig">{clientData.nicSelected.ip}</div>
-      <div>Mask: {clientData.nicSelected.mask}</div>
-      <div>Gate: {clientData.nicSelected.mask}</div>
+      <div>
+        <div>Mask:</div>
+        <div>{clientData.nicSelected.mask}</div>
+      </div>
+      <div>
+        <div>Gate:</div>
+        <div>{clientData.nicSelected.gateway}</div>
+      </div>
       <br>
       {#if clientData.nicSelected.ipsAdded.length > 0}
         {#each  clientData.nicSelected.ipsAdded as ipAdd}
-          <div class="bright">+ IP: {ipAdd.ip}</div>
-          <div>Mask: {ipAdd.mask}</div>
+          <div class="flex bright">
+            <div>+ IP:</div>
+            <div>{ipAdd.ip}</div>
+          </div>
+          <div>
+            <div>Mask:</div>
+            <div>{ipAdd.mask}</div>
+          </div>
           <br>
         {/each}
       {/if}
       {#if clientData.nicSelected.dns.length > 0}
         {#each clientData.nicSelected.dns as dns, i}
-          <div>DNS{i+1}: {dns}</div>
+          <div>
+            <div>DNS{i+1}:</div>
+            <div>{dns}</div>
+          </div>
         {/each}
       {/if}
       <br>
-      <div>DHCP: {clientData.nicSelected.ipIsDhcp}</div>
-      <div>Metric: {clientData.nicSelected.interfaceMetric}</div>
+      <div>
+        <div>DHCP:</div>
+        <div>{clientData.nicSelected.ipIsDhcp}</div>
+      </div>
+      <div>
+        <div>Metric:</div>
+        <div>{clientData.nicSelected.interfaceMetric}</div>
+      </div>
     </div>
 
   </aside>
@@ -490,6 +511,10 @@
   .nicInfo div.bright {
     color: var(--color-text-bright);
   }
+  .nicInfo div {
+    display: flex;
+    gap: var(--pad);
+  }
 
   /* Prest Actions */
   .actions {
@@ -507,22 +532,6 @@
     display: flex;
     align-items: center;
     gap: var(--pad);
-  }
-  .cyan {
-    background-color: var(--color-bg-cyan);
-    color: var(--color-text-cyan);
-  }
-  .green {
-    background-color: var(--color-bg-green);
-    color: var(--color-text-green);
-  }
-  .yellow {
-    background-color: var(--color-bg-yellow);
-    color: var(--color-text-yellow);
-  }
-  .red {
-    background-color: var(--color-bg-red);
-    color: var(--color-text-red);
   }
 
   /* Presets */

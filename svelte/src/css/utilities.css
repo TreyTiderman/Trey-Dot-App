@@ -3,7 +3,7 @@
   background-color: transparent;
 }
 .dim {
-  background-color: var(--color-grey-100);
+  background-color: var(--color-text-grey);
   color: var(--color-bg-grey);
 }
 .grey {

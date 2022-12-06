@@ -47,34 +47,40 @@
     <br>
     
     <div class="color-squares">
-      <div class="color-square" style="{`background: oklch(15% 0.10 40)`};"></div>
-      <div class="color-square" style="{`background: oklch(30% 0.20 40)`};"></div>
-      <div class="color-square" style="{`background: oklch(60% 0.30 40)`};"></div>
-      <div class="color-square" style="{`background: oklch(85% 0.10 40)`};"></div>
+      <div class="color-square" style="{`background: oklch(15% 0.10 30)`};"></div>
+      <div class="color-square" style="{`background: oklch(30% 0.20 30)`};"></div>
+      <div class="color-square" style="{`background: oklch(60% 0.30 30)`};"></div>
+      <div class="color-square" style="{`background: oklch(75% 0.23 30)`};"></div>
+      <div class="color-square" style="{`background: oklch(85% 0.10 30)`};"></div>
       
-      <div class="color-square" style="{`background: oklch(15% 0.10 85)`};"></div>
-      <div class="color-square" style="{`background: oklch(30% 0.20 85)`};"></div>
-      <div class="color-square" style="{`background: oklch(60% 0.30 85)`};"></div>
-      <div class="color-square" style="{`background: oklch(85% 0.10 85)`};"></div>
+      <div class="color-square" style="{`background: oklch(15% 0.10 82)`};"></div>
+      <div class="color-square" style="{`background: oklch(30% 0.20 82)`};"></div>
+      <div class="color-square" style="{`background: oklch(60% 0.30 82)`};"></div>
+      <div class="color-square" style="{`background: oklch(75% 0.23 82)`};"></div>
+      <div class="color-square" style="{`background: oklch(85% 0.10 82)`};"></div>
       
-      <div class="color-square" style="{`background: oklch(15% 0.10 170)`};"></div>
-      <div class="color-square" style="{`background: oklch(30% 0.20 170)`};"></div>
-      <div class="color-square" style="{`background: oklch(60% 0.30 170)`};"></div>
-      <div class="color-square" style="{`background: oklch(85% 0.10 170)`};"></div>
+      <div class="color-square" style="{`background: oklch(15% 0.10 160)`};"></div>
+      <div class="color-square" style="{`background: oklch(30% 0.20 160)`};"></div>
+      <div class="color-square" style="{`background: oklch(60% 0.30 160)`};"></div>
+      <div class="color-square" style="{`background: oklch(75% 0.23 160)`};"></div>
+      <div class="color-square" style="{`background: oklch(85% 0.10 160)`};"></div>
       
       <div class="color-square" style="{`background: oklch(15% 0.10 230)`};"></div>
       <div class="color-square" style="{`background: oklch(30% 0.20 230)`};"></div>
       <div class="color-square" style="{`background: oklch(60% 0.30 230)`};"></div>
+      <div class="color-square" style="{`background: oklch(75% 0.23 230)`};"></div>
       <div class="color-square" style="{`background: oklch(85% 0.10 230)`};"></div>
       
       <div class="color-square" style="{`background: oklch(15% 0.10 290)`};"></div>
       <div class="color-square" style="{`background: oklch(30% 0.20 290)`};"></div>
       <div class="color-square" style="{`background: oklch(60% 0.30 290)`};"></div>
+      <div class="color-square" style="{`background: oklch(75% 0.23 290)`};"></div>
       <div class="color-square" style="{`background: oklch(85% 0.10 290)`};"></div>
 
       <div class="color-square" style="{`background: oklch(15% 0.10 350)`};"></div>
       <div class="color-square" style="{`background: oklch(30% 0.20 350)`};"></div>
       <div class="color-square" style="{`background: oklch(60% 0.30 350)`};"></div>
+      <div class="color-square" style="{`background: oklch(75% 0.23 350)`};"></div>
       <div class="color-square" style="{`background: oklch(85% 0.10 350)`};"></div>
     </div>
     
@@ -115,7 +121,7 @@
 
   .color-squares {
     display: grid;
-    grid-template-columns: repeat(4, 4rem);
+    grid-template-columns: repeat(5, 4rem);
     gap: var(--gap);
   }
   .color-square {

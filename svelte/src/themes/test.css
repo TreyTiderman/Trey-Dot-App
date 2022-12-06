@@ -15,7 +15,7 @@ html {
 
   /* Colors */
   --color-bg: var(--color-grey-50);
-  --color-bg-header: var(--color-grey-200);
+  --color-bg-header: var(--color-grey-50);
   --color-bg-section: var(--color-grey-100);
 
   --color-text: var(--color-grey-700);
@@ -40,7 +40,7 @@ html {
   /*  Border, Border Radius, Outline */
   --border-thickness: 0.125rem;
   --border: var(--border-thickness) solid var(--color-border);
-  --radius: 0.4rem;
+  --radius: 0.0rem;
   --radius-lg: 0.8rem;
 
   /* Other colors */

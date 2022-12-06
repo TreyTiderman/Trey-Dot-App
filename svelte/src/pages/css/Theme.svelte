@@ -79,7 +79,7 @@
   }
   section {
     padding: var(--gap);
-    background-color: var(--color-bg-header);
+    background-color: var(--color-bg-section);
     border-radius: var(--radius-lg);
     display: grid;
     gap: var(--gap);

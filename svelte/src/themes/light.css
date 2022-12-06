@@ -1,5 +1,5 @@
-html {
-  color-scheme: dark;
+html.light {
+  color-scheme: light;
 
   /* Text */
   --font-size: 16px;
@@ -14,28 +14,28 @@ html {
   --pad-input: var(--pad) calc(1.2*var(--pad));
 
   /* Colors */
-  --color-bg: var(--color-grey-50);
-  --color-bg-header: var(--color-grey-200);
-  --color-bg-section: var(--color-grey-100);
+  --color-bg: var(--color-grey-950);
+  --color-bg-header: var(--color-grey-900);
+  --color-bg-section: var(--color-grey-900);
 
-  --color-text: var(--color-grey-700);
-  --color-text-bright: var(--color-grey-950);
+  --color-text: var(--color-grey-300);
+  --color-text-bright: var(--color-grey-50);
   --color-text-dim: var(--color-grey-400);
   
-  --color-bg-input: var(--color-grey-300);
+  --color-bg-input: var(--color-grey-800);
   --color-text-input: var(--color-text-bright);
-  --color-text-link: var(--color-blue-600);
+  --color-text-link: var(--color-blue-500);
   
-  --color-bg-highlight: var(--color-purple-500);
+  --color-bg-highlight: var(--color-purple-800);
   --color-text-highlight: var(--color-purple-100);
   
-  --color-border: var(--color-bg-input);
+  --color-border: var(--color-grey-500);
   --color-shadow: #00000099;
 
   /* Filters for hover, disable, active */
-  --filter-brightness-hover: brightness(125%);
-  --filter-brightness-disable: brightness(60%);
-  --filter-brightness-active: brightness(75%);
+  --filter-brightness-hover: brightness(105%);
+  --filter-brightness-disable: brightness(70%);
+  --filter-brightness-active: brightness(85%);
   
   /*  Border, Border Radius, Outline */
   --border-thickness: 0.125rem;
@@ -44,16 +44,16 @@ html {
   --radius-lg: 0.8rem;
 
   /* Other colors */
-  --color-bg-grey:     var(--color-grey-600);
-  --color-bg-red:      var(--color-red-500);
-  --color-bg-orange:   var(--color-orange-500);
-  --color-bg-yellow:   var(--color-yellow-500);
-  --color-bg-lime:     var(--color-lime-500);
-  --color-bg-green:    var(--color-green-500);
-  --color-bg-cyan:     var(--color-cyan-500);
-  --color-bg-blue:     var(--color-blue-500);
-  --color-bg-purple:   var(--color-purple-500);
-  --color-bg-pink:     var(--color-pink-600);
+  --color-bg-grey:     var(--color-grey-700);
+  --color-bg-red:      var(--color-red-700);
+  --color-bg-orange:   var(--color-orange-700);
+  --color-bg-yellow:   var(--color-yellow-700);
+  --color-bg-lime:     var(--color-lime-700);
+  --color-bg-green:    var(--color-green-700);
+  --color-bg-cyan:     var(--color-cyan-700);
+  --color-bg-blue:     var(--color-blue-700);
+  --color-bg-purple:   var(--color-purple-700);
+  --color-bg-pink:     var(--color-pink-700);
 
   --color-text-grey:   var(--color-grey-100);
   --color-text-red:    var(--color-red-100);

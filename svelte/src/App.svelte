@@ -5,9 +5,8 @@
   import { router } from "./js/global.js"
 
   // Theme
-  // import "./themes/theme-dark.css"
-  // import "./themes/theme-light.css"
-  // import "./themes/theme-test.css"
+  import "./themes/light.css"
+  import "./themes/test.css"
 
   // Components
   import Icon from './components/Icon.svelte'
