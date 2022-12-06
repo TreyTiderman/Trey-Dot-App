@@ -1,20 +1,20 @@
 /* Theme */
-body.light {
+html.light {
   color-scheme: light;
 
   /* Colors */
   --color-bg: hsl(220, 12%, 96%);
-  --color-bg-2: hsl(220, 12%, 90%);
-  --color-header: hsl(220, 12%, 86%);
+  --color-bg-section: hsl(220, 12%, 90%);
+  --color-bg-header: hsl(220, 12%, 86%);
   --color-text-bright: hsl(220, 12%, 0%);
   --color-text: hsl(220, 12%, 10%);
   --color-text-dim: hsl(220, 12%, 55%);
   
-  --color-bg-secondary: hsl(220, 12%, 85%);
-  --color-text-secondary: var(--color-text-bright);
+  --color-bg-input: hsl(220, 12%, 85%);
+  --color-text-input: var(--color-text-bright);
 
-  --color-bg-primary: hsl(265, 80%, 75%);
-  --color-text-primary: hsl(265, 90%, 10%);
+  --color-bg-highlight: hsl(265, 80%, 75%);
+  --color-text-highlight: hsl(265, 90%, 10%);
 
   --filter-brightness-hover: brightness(90%);
   --filter-brightness-hover: brightness(120%);
@@ -24,8 +24,8 @@ body.light {
   --color-hover: hsl(220, 0%, 50%);
   --color-pressed: hsl(220, 0%, 30%);
 
-  --color-border: var(--color-header);
-  --color-border-bright: var(--color-bg-secondary);
+  --color-border: var(--color-bg-header);
+  --color-border: var(--color-bg-input);
   --color-shadow: #00000015;
 
   /* Other colors */
@@ -61,14 +61,14 @@ body.light {
   --pad: 0.7rem;
   --gap: 1.2rem;
   --margin: var(--gap) var(--gap);
-  --padding: var(--pad) var(--pad);
+  --pad-input: var(--pad) var(--pad);
 
   /*  Border, Border Radius, Outline */
   /* width | style | color */
   --border: 2px solid var(--color-border);
   --outline: 2px solid var(--color-border);
   --radius: 0.4rem;
-  --radius-2: 0.8rem;
+  --radius-lg: 0.8rem;
   
   /* Shadow */ 
   /* box-shadow: offset-x | offset-y | blur-radius | spread-radius | color */
@@ -76,7 +76,7 @@ body.light {
   --text-shadow: 1px 1px 4px var(--color-shadow);
   --shadow: 2px 2px 2px 0px var(--color-shadow);
   --shadow: var(--color-shadow) 0px 4px 6px -1px, var(--color-shadow) 0px 2px 4px -1px;
-  --shadow-2:
+  --shadow-lg:
       2px 2px 2px 0px var(--color-shadow),
       0px 0px 10px 10px var(--color-shadow);
   --shadow-input: -2px -2px 2px 0px var(--color-shadow);

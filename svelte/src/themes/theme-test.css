@@ -1,25 +1,25 @@
 /* Theme */
-body.test {
+html.test {
 
   /* Colors */
   --color-bg: #000;
-  --color-header: #111;
+  --color-bg-header: #111;
   --color-text-bright: #FFF;
   --color-text: #DDD;
   --color-text-dim: #999;
   
-  --color-bg-secondary: #FFF;
-  --color-text-secondary: #000;
+  --color-bg-input: #FFF;
+  --color-text-input: #000;
 
-  --color-bg-primary: hsl(130, 95%, 55%);
-  --color-text-primary: #000;
+  --color-bg-highlight: hsl(130, 95%, 55%);
+  --color-text-highlight: #000;
   
   --filter-brightness-hover: brightness(125%);
   --filter-brightness-disable: brightness(80%);
   --color-highlight: hsl(265, 40%, 60%, 15%);
 
-  --color-border: var(--color-header);
-  --color-border-bright: #555;
+  --color-border: var(--color-bg-header);
+  --color-border: #555;
   --color-shadow: #00000099;
 
   /* Other colors */
@@ -55,7 +55,7 @@ body.test {
   --pad: 1rem;
   --gap: 1.2rem;
   --margin: var(--gap) var(--gap);
-  --padding: var(--pad) var(--pad);
+  --pad-input: var(--pad) var(--pad);
 
   /*  Border, Border Radius, Outline */
   /* width | style | color */
@@ -63,14 +63,14 @@ body.test {
   --border: 2px solid var(--color-border);
   --outline: calc(1rem / 8) solid var(--color-border);
   --radius: 0.25rem;
-  --radius-2: 0.5rem;
+  --radius-lg: 0.5rem;
   
   /* Shadow */ 
   /* box-shadow: offset-x | offset-y | blur-radius | spread-radius | color */
   /* text-shadow: offset-x | offset-y | blur-radius | color */
   --text-shadow: 1px 1px 4px var(--color-shadow);
   --shadow: 2px 2px 4px 0px var(--color-shadow);
-  --shadow-2:
+  --shadow-lg:
       2px 2px 2px 0px var(--color-shadow),
       0px 0px 10px 10px var(--color-shadow);
   --shadow-input: -2px -2px 2px 0px var(--color-shadow);

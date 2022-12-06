@@ -21,7 +21,7 @@
 
   // Dynamic Variables
   $: percent = ((value - min) / (max - min)) * 100;
-  $: background = `linear-gradient(to right, var(--color-bg-primary) 0% ${percent}%, var(--color-bg-secondary) ${percent}% 100%)`
+  $: background = `linear-gradient(to right, var(--color-bg-highlight) 0% ${percent}%, var(--color-bg-input) ${percent}% 100%)`
 
 </script>
 

@@ -50,7 +50,7 @@
   })
 
   let theme = "dark"
-  $: document.querySelector("body").classList = theme
+  $: document.documentElement.classList = theme
 
 </script>
 
@@ -75,7 +75,7 @@
 <style>
   header {
     color: var(--color-text-bright);
-    background-color: var(--color-header);
+    background-color: var(--color-bg-header);
   
     overflow-x: auto;
     overflow-y: hidden;

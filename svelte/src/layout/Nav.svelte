@@ -70,7 +70,7 @@
   nav {
     z-index: 10;
     min-width: 16rem;
-    background-color: var(--color-header);
+    background-color: var(--color-bg-header);
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -86,10 +86,8 @@
     gap: var(--gap);
   }
   nav button.active {
-    color: var(--color-text-purple);
-    background-color: var(--color-bg-purple);
-    /* color: var(--color-text-bright); */
-    /* background-color: var(--color-bg); */
+    color: var(--color-text-input);
+    background-color: var(--color-bg-input);
   }
   .subMenu {
     display: flex;
@@ -112,6 +110,6 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-input);
   }
 </style>

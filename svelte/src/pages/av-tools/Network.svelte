@@ -446,7 +446,7 @@
     min-width: 16rem;
     padding: var(--gap);
     border-right: var(--border);
-    border-color: var(--color-header);
+    border-color: var(--color-bg-header);
 
     display: grid;
     align-content: flex-start;
@@ -471,7 +471,7 @@
       padding: var(--gap);
       border-right: none;
       border-bottom: var(--border);
-      border-color: var(--color-header);
+      border-color: var(--color-bg-header);
     }
   }
 
@@ -554,7 +554,7 @@
     display: grid;
     align-content: flex-start;
     padding: var(--pad);
-    background-color: var(--color-bg-2);
+    background-color: var(--color-bg-section);
     color: var(--color-text-dim);
     position: relative;
   }
@@ -606,8 +606,8 @@
     width: 7.4rem;
   }
   .presetTable .presetSelected {
-    color: var(--color-text-secondary);
-    background-color: var(--color-bg-secondary);
+    color: var(--color-text-input);
+    background-color: var(--color-bg-input);
   }
   .presetTable .presetSelected .checkmark {
     position: absolute;
@@ -624,7 +624,10 @@
   }
   @media (hover: hover) {
     .presetTable button:hover {
-      background-color: var(--color-bg-2);
+      background-color: var(--color-bg-section);
+    }
+    .presetTable .presetSelected:hover {
+      background-color: var(--color-bg-input);
     }
   }
 
@@ -633,8 +636,8 @@
     color: var(--color-text-purple);
     background-color: var(--color-bg-purple);
     
-    color: var(--color-text-secondary);
-    background-color: var(--color-bg-secondary);
+    color: var(--color-text-input);
+    background-color: var(--color-bg-input);
   }
   .presetButtons .presetSelected span:first-child {
     color: var(--color-text-purple);

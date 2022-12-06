@@ -5,9 +5,9 @@
   import { router } from "./js/global.js"
 
   // Theme
-  import "./themes/theme-dark.css"
-  import "./themes/theme-light.css"
-  import "./themes/theme-test.css"
+  // import "./themes/theme-dark.css"
+  // import "./themes/theme-light.css"
+  // import "./themes/theme-test.css"
 
   // Components
   import Icon from './components/Icon.svelte'
@@ -18,20 +18,24 @@
 
   // Pages 
   import Home from './pages/Home.svelte';
+  // CSS
+  import Palette from './pages/css/Palette.svelte';
+  import Theme from './pages/css/Theme.svelte';
+  import Html from './pages/css/Html.svelte';
   // Templates
   import TemplatePage from './pages/templates/Page.svelte';
   import Panels_2 from './pages/templates/Panels_2.svelte';
-  import Html from './pages/templates/Html.svelte';
-  import Components from './pages/templates/Components.svelte';
-  import Theme from './pages/templates/Theme.svelte';
+  // Components
+  import Components from './pages/components/Components.svelte';
+  import Icons from './pages/components/Icons.svelte';
+  import Sliders from './pages/components/Sliders.svelte';
   // Tests
-  import OKLCH from './pages/tests/OKLCH.svelte';
-  import Sliders from './pages/tests/Sliders.svelte';
+  import Oklch from './pages/tests/Oklch.svelte';
   // AV-Tools
-  import Network from './pages/av-tools/Network.svelte';
-  import SetIP from './pages/av-tools/SetIP.svelte'
   import Dhcp from './pages/av-tools/Dhcp.svelte';
+  import Network from './pages/av-tools/Network.svelte';
   import SerialPort from './pages/av-tools/SerialPort.svelte';
+  import SetIP from './pages/av-tools/SetIP.svelte'
 
   // All available pages
   $router.pageObjs = {
@@ -43,6 +47,7 @@
       icon: "house",
       pageComponent: Home,
     },
+
     Html: {
       name: {
         header: "HTML",
@@ -51,6 +56,23 @@
       icon: "html5",
       pageComponent: Html,
     },
+    Palette: {
+      name: {
+        header: "Palette",
+        nav: "Palette"
+      },
+      icon: "palette",
+      pageComponent: Palette,
+    },
+    Theme: {
+      name: {
+        header: "Theme",
+        nav: "Theme"
+      },
+      icon: "css3-alt",
+      pageComponent: Theme,
+    },
+    
     Components: {
       name: {
         header: "Components",
@@ -59,14 +81,23 @@
       icon: "shapes",
       pageComponent: Components,
     },
-    Theme: {
+    Icons: {
       name: {
-        header: "Theme",
-        nav: "Theme"
+        header: "Icon",
+        nav: "Icon"
       },
-      icon: "palette",
-      pageComponent: Theme,
+      icon: "icons",
+      pageComponent: Icons,
     },
+    Sliders: {
+      name: {
+        header: "Slider",
+        nav: "Slider"
+      },
+      icon: "sliders",
+      pageComponent: Sliders,
+    },
+
     TemplatePage: {
       name: {
         header: "TemplatePage",
@@ -83,21 +114,23 @@
       icon: "table-columns",
       pageComponent: Panels_2,
     },
-    OKLCH: {
+    
+    Oklch: {
       name: {
-        header: "OKLCH",
-        nav: "OKLCH"
+        header: "Oklch",
+        nav: "Oklch"
       },
       icon: "palette",
-      pageComponent: OKLCH,
+      pageComponent: Oklch,
     },
-    Sliders: {
+    
+    Dhcp: {
       name: {
-        header: "Sliders",
-        nav: "Sliders"
+        header: "Dhcp",
+        nav: "Dhcp"
       },
-      icon: "sliders",
-      pageComponent: Sliders,
+      icon: "server",
+      pageComponent: Dhcp,
     },
     Network: {
       name: {
@@ -106,14 +139,6 @@
       },
       icon: "network-wired",
       pageComponent: Network,
-    },
-    DHCP: {
-      name: {
-        header: "DHCP",
-        nav: "DHCP"
-      },
-      icon: "server",
-      pageComponent: Dhcp,
     },
     SerialPort: {
       name: {
@@ -131,6 +156,7 @@
       icon: "ethernet",
       pageComponent: SetIP,
     },
+
     Settings: {
       name: {
         header: "Settings",
@@ -139,20 +165,44 @@
       icon: "gear",
       pageComponent: TemplatePage,
     },
+  
   }
 
   // Nav Menu
+  const cssSubMenu = {
+    name: {
+      header: "CSS",
+      nav: "CSS"
+    },
+    icon: "css3-alt",
+    hideSubMenu: true,
+    subMenu: [
+      $router.pageObjs.Html,
+      $router.pageObjs.Palette,
+      $router.pageObjs.Theme,
+    ],
+  }
+  const componentsSubMenu = {
+    name: {
+      header: "Components",
+      nav: "Components"
+    },
+    icon: "shapes",
+    hideSubMenu: true,
+    subMenu: [
+      $router.pageObjs.Components,
+      $router.pageObjs.Icons,
+      $router.pageObjs.Sliders,
+    ],
+  }
   const templatesSubMenu = {
     name: {
       header: "Templates",
       nav: "Templates"
     },
-    icon: "clipboard",
+    icon: "table-columns",
     hideSubMenu: true,
     subMenu: [
-      $router.pageObjs.Html,
-      $router.pageObjs.Components,
-      $router.pageObjs.Theme,
       $router.pageObjs.TemplatePage,
       $router.pageObjs.Panels_2,
     ],
@@ -165,8 +215,7 @@
     icon: "vials",
     hideSubMenu: true,
     subMenu: [
-      $router.pageObjs.OKLCH,
-      $router.pageObjs.Sliders,
+      $router.pageObjs.Oklch,
     ],
   }
   const avToolsSubMenu = {
@@ -175,16 +224,18 @@
       nav: "AV-Tools"
     },
     icon: "wrench",
-    hideSubMenu: false,
+    hideSubMenu: true,
     subMenu: [
       $router.pageObjs.Network,
-      $router.pageObjs.DHCP,
+      $router.pageObjs.Dhcp,
       $router.pageObjs.SerialPort,
       $router.pageObjs.SetIP,
     ],
   }
   const navMenu = [
     $router.pageObjs.Home,
+    cssSubMenu,
+    componentsSubMenu,
     templatesSubMenu,
     testsSubMenu,
     avToolsSubMenu,

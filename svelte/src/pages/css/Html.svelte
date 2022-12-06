@@ -74,14 +74,13 @@ array.sort(function (a, b) {
 });`
   }</code></pre>
   </div>
-  <blockquote class="quote-bg">
-    <p>
-      Integer viverra elit sed tincidunt dignissim. Donec luctus malesuada posuere. Sed
-      pulvinar pulvinar augue. Aenean id ligula justo. Curabitur egestas sed augue vel
-      vulputate. Ut tempor sem sit amet diam molestie, id tincidunt lorem vulputate. Duis eu
-      consectetur turpis, sit amet lobortis magna.
+  <blockquote>
+    <p class="indent">
+      In the beginning the Universe was created. 
+      This has made a lot of people very angry 
+      and has been widely regarded as a bad move.
     </p>
-    <footer>Cicero, <cite>De finibus bonorum et malorum</cite></footer>
+    <cite>Douglas Adams</cite>
   </blockquote>
 </section>
 
@@ -174,7 +173,7 @@ array.sort(function (a, b) {
 
 <hr>
 
-<!-- Button / Range -->
+<!-- Buttons / Range -->
 <section>
   <h2>Buttons</h2>
   <div class="flex">
@@ -184,6 +183,66 @@ array.sort(function (a, b) {
     <input type="reset" value="Reset Type">
     <input type="submit" value="Submit Type">
     <input type="file">
+  </div>
+</section>
+
+<hr>
+
+<!-- Inputs -->
+<section>
+  <h2>Inputs</h2>
+  <div>
+    <label>
+      Text Type <br>
+      <input type="text" placeholder="placeholder...">
+    </label>
+  </div>
+  <div>
+    <label>
+      Password Type <br>
+      <input type="password" placeholder="password...">
+    </label>
+  </div>
+  <div>
+    <label>
+      Number Type <br>
+      <input type="number" placeholder="420...">
+    </label>
+  </div>
+  <div>
+    <label>
+      Date <br>
+      <input type="date">
+    </label>
+  </div>
+  <div>
+    <label>
+      Time <br>
+      <input type="time">
+    </label>
+  </div>
+  <div>
+    <label>
+      Select <br>
+      <select>
+        <optgroup label="Optgroup 1">
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </optgroup>
+        <optgroup label="Optgroup 2">
+          <option>Option 1</option>
+          <option>Option 2 with extra text</option>
+          <option>Option 3</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>
+      Textarea <br>
+      <textarea>Test</textarea>
+    </label>
   </div>
 </section>
 
@@ -228,6 +287,18 @@ array.sort(function (a, b) {
 </section>
 
 <hr>
+
+<!-- Details -->
+<section>
+  <h2>Details</h2>
+  <details>
+    <summary>Details</summary>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique in 
+    laboriosam incidunt at explicabo reprehenderit dolores. Eveniet, 
+    exercitationem sequi quis explicabo iure laudantium veritatis, aliquid 
+    odio, molestiae nulla assumenda pariatur.
+  </details>
+</section>
 
 <!-- Footer -->
 <footer>

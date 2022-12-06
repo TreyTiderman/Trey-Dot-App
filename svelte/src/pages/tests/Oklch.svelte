@@ -154,7 +154,7 @@
     min-width: 300px;
     padding: var(--gap);
     border-right: var(--border);
-    border-color: var(--color-header);
+    border-color: var(--color-bg-header);
 
     display: grid;
     align-content: flex-start;
@@ -178,7 +178,7 @@
       padding: var(--gap);
       border-right: none;
       border-bottom: var(--border);
-      border-color: var(--color-header);
+      border-color: var(--color-bg-header);
     }
   }
 

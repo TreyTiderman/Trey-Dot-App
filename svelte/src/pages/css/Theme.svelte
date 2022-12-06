@@ -18,10 +18,11 @@
   </p>
   <div class="flex">
     <button>Button</button>
-    <button class="clear">clear</button>
     <button disabled>disabled</button>
+    <button class="clear">clear</button>
   </div>
   <div class="flex">
+    <button class="dim">dim</button>
     <button class="grey">grey</button>
     <button class="red">red</button>
     <button class="orange">orange</button>
@@ -44,10 +45,11 @@
     </p>
     <div class="flex">
       <button>Button</button>
-      <button class="clear">clear</button>
       <button disabled>disabled</button>
+      <button class="clear">clear</button>
     </div>
     <div class="flex">
+      <button class="dim">dim</button>
       <button class="grey">grey</button>
       <button class="red">red</button>
       <button class="orange">orange</button>
@@ -77,8 +79,8 @@
   }
   section {
     padding: var(--gap);
-    background-color: var(--color-header);
-    border-radius: var(--radius-2);
+    background-color: var(--color-bg-header);
+    border-radius: var(--radius-lg);
     display: grid;
     gap: var(--gap);
     align-content: flex-start;
@@ -88,47 +90,5 @@
     gap: var(--gap);
     flex-wrap: wrap;
   }
-  button.clear {
-    background-color: transparent;
-  }
-  button.grey {
-    background-color: var(--color-bg-grey);
-    color: var(--color-text-grey);
-  }
-  button.red {
-    background-color: var(--color-bg-red);
-    color: var(--color-text-red);
-  }
-  button.orange {
-    background-color: var(--color-bg-orange);
-    color: var(--color-text-orange);
-  }
-  button.yellow {
-    background-color: var(--color-bg-yellow);
-    color: var(--color-text-yellow);
-  }
-  button.lime {
-    background-color: var(--color-bg-lime);
-    color: var(--color-text-lime);
-  }
-  button.green {
-    background-color: var(--color-bg-green);
-    color: var(--color-text-green);
-  }
-  button.cyan {
-    background-color: var(--color-bg-cyan);
-    color: var(--color-text-cyan);
-  }
-  button.blue {
-    background-color: var(--color-bg-blue);
-    color: var(--color-text-blue);
-  }
-  button.purple {
-    background-color: var(--color-bg-purple);
-    color: var(--color-text-purple);
-  }
-  button.pink {
-    background-color: var(--color-bg-pink);
-    color: var(--color-text-pink);
-  }
+
 </style>

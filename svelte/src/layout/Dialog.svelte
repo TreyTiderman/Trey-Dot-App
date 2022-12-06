@@ -122,10 +122,10 @@
     display: grid;
     grid-template-rows: 4rem 1fr;
     align-items: flex-start;
-    border-radius: var(--radius-2);
+    border-radius: var(--radius-lg);
     background-color: var(--color-bg);
     border: var(--border);
-    border-color: var(--color-border-bright);
+    border-color: var(--color-border);
     transform: translate(0px, 0px);
   }
   h2 {
@@ -138,14 +138,14 @@
     margin-right: 4rem;
     width: 100%;
     padding: var(--gap);
-    background-color: var(--color-header);
-    border-radius: calc(var(--radius-2)/1.24) calc(var(--radius-2)/1.24) 0 0;
+    background-color: var(--color-bg-header);
+    border-radius: calc(var(--radius-lg)/1.24) calc(var(--radius-lg)/1.24) 0 0;
     border-bottom: var(--border);
     color: var(--color-text-bright);
   }
   .dialogExit {
     background-color: transparent;
-    background-color: var(--color-header);
+    background-color: var(--color-bg-header);
     border-bottom: var(--border);
     color: var(--color-text);
     line-height: 1;
@@ -155,7 +155,7 @@
     top: -.1rem;
     top: 0;
     right: 0;
-    border-radius: 0 calc(var(--radius-2)/1.24) 0 0;
+    border-radius: 0 calc(var(--radius-lg)/1.24) 0 0;
     
     cursor: pointer;
     font-size: 1.6rem;
