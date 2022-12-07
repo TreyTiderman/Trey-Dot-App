@@ -99,7 +99,7 @@
   .hide { display: none; }
 
   /* If width is less than 1200px make the nav menu full width */
-  @media (max-width: 1200px) {
+  @media (max-width: 800px) {
     nav {
       position: fixed;
       top: 4.2rem;

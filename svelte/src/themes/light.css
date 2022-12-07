@@ -19,7 +19,7 @@ html.light {
   --color-bg-section: var(--color-grey-900);
 
   --color-text: var(--color-grey-300);
-  --color-text-bright: var(--color-grey-50);
+  --color-text-bright: var(--color-grey-100);
   --color-text-dim: var(--color-grey-400);
   
   --color-bg-input: var(--color-grey-800);
@@ -29,12 +29,12 @@ html.light {
   --color-bg-highlight: var(--color-purple-800);
   --color-text-highlight: var(--color-purple-100);
   
-  --color-border: var(--color-grey-500);
+  --color-border: var(--color-bg-input);
   --color-shadow: #00000099;
 
   /* Filters for hover, disable, active */
   --filter-brightness-hover: brightness(105%);
-  --filter-brightness-disable: brightness(70%);
+  --filter-brightness-disable: brightness(65%);
   --filter-brightness-active: brightness(85%);
   
   /*  Border, Border Radius, Outline */

@@ -65,7 +65,7 @@
       <span>Server Time</span>
       <pre>{time} {date}</pre>
     </div>
-    <button on:click={() => theme = theme === "dark" ? "light" : "dark"}>
+    <button on:click={() => theme = theme === "dark" ? "test" : "dark"}>
       <Icon name="circle-half-stroke" size={iconSize} />
     </button>
   {/if}
