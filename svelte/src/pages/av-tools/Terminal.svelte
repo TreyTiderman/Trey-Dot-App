@@ -2,7 +2,7 @@
 <script>
 
   // Components
-  import Icon from '../components/Icon.svelte'
+  import Icon from '../../components/Icon.svelte'
 
   // Exports
   export let showCRLF = true
@@ -96,10 +96,7 @@
       {timeColFormat === "datetime" ? "Date Time" : "Time"}
       <Icon name="arrows-rotate" size=.8 style="display: inline;" color="var(--color-text-dim)"/>
     </button>
-    <div class="terminal-col3">
-      Sent <Icon name="up-long" size=.8 style="display: inline;" color="var(--color-bg-green)"/> / 
-      Received <Icon name="down-long" size=.8 style="display: inline;" color="var(--color-bg-blue)"/>
-    </div>
+    <pre class="terminal-col3">Sent <Icon name="up-long" size=.8 style="display: inline;" color="var(--color-bg-green)"/> / Received <Icon name="down-long" size=.8 style="display: inline;" color="var(--color-bg-blue)"/></pre>
   </div>
 
   <!-- Lines -->
@@ -192,6 +189,10 @@
     min-width: var(--col2-width);
     color: var(--color-text-dim);
   }
+  .terminal-col2 {
+    min-width: var(--col2-width);
+    color: var(--color-text-dim);
+  }
 
   .textButton {
     padding: 0;
@@ -231,9 +232,5 @@
     border-color: var(--color-border);
     background: var(--color-bg-cyan);
   }
-  
-  /* pre {
-    white-space: pre-wrap;
-    white-space: pre;
-  } */
+
 </style>

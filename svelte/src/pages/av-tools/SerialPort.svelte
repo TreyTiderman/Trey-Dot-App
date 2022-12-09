@@ -4,7 +4,7 @@
 
   // Components
   import Icon from '../../components/Icon.svelte'
-  import Terminal from '../../components/Terminal.svelte'
+  import Terminal from './Terminal.svelte'
 
   // Component Startup
   import { onMount } from 'svelte';

@@ -242,7 +242,7 @@
   ]
   
   $router.pageObj = navMenu[0]
-  $router.pageObj = $router.pageObjs.Network
+  $router.pageObj = $router.pageObjs.SetIP
   $router.dialogObj = undefined
   // $router.dialogObj = $router.pageObjs.SetIP
 

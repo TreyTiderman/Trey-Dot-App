@@ -3,8 +3,8 @@
   background-color: transparent;
 }
 .dim {
-  background-color: var(--color-text-grey);
-  color: var(--color-bg-grey);
+  background-color: var(--color-bg-dim);
+  color: var(--color-text-dim);
 }
 .grey {
   background-color: var(--color-bg-grey);
@@ -119,4 +119,7 @@
   overflow: auto;
 }
 .hide { display: none; }
+.invisible { visibility: hidden; }
 .overflow { overflow: auto; }
+.fill { width: 100%; }
+.mono { font-family: var(--font-mono); }

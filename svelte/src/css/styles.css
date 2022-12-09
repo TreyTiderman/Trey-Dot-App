@@ -215,6 +215,7 @@ textarea {
 }
 /* Buttons */
 button,
+select,
 input[type=file],
 input[type=reset],
 input[type=button],
@@ -350,12 +351,11 @@ details summary::-webkit-details-marker { display: none; }
 /* Disabled */
 :disabled,
 :disabled + label {
-  filter: var(--filter-brightness-disable);
+  filter: var(--filter-brightness-disable) grayscale(1);
   cursor: not-allowed;
 }
 :disabled:hover {
-  filter: var(--filter-brightness-disable);
-  /* filter: brightness(120%); */
+  filter: var(--filter-brightness-disable) grayscale(1);
 }
 
 /* Text selection */

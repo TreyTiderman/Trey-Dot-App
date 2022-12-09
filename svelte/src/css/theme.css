@@ -17,14 +17,15 @@ html {
   --color-bg: var(--color-grey-50);
   --color-bg-header: var(--color-grey-200);
   --color-bg-section: var(--color-grey-100);
+  --color-bg-dim: var(--color-grey-200);
 
   --color-text: var(--color-grey-700);
   --color-text-bright: var(--color-grey-950);
   --color-text-dim: var(--color-grey-400);
+  --color-text-link: var(--color-blue-600);
   
   --color-bg-input: var(--color-grey-300);
   --color-text-input: var(--color-text-bright);
-  --color-text-link: var(--color-blue-600);
   
   --color-bg-highlight: var(--color-purple-500);
   --color-text-highlight: var(--color-purple-100);

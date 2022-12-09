@@ -17,14 +17,15 @@ html.light {
   --color-bg: var(--color-grey-950);
   --color-bg-header: var(--color-grey-900);
   --color-bg-section: var(--color-grey-900);
+  --color-bg-dim: var(--color-grey-900);
 
   --color-text: var(--color-grey-300);
   --color-text-bright: var(--color-grey-100);
   --color-text-dim: var(--color-grey-400);
+  --color-text-link: var(--color-blue-500);
   
   --color-bg-input: var(--color-grey-800);
   --color-text-input: var(--color-text-bright);
-  --color-text-link: var(--color-blue-500);
   
   --color-bg-highlight: var(--color-purple-800);
   --color-text-highlight: var(--color-purple-100);

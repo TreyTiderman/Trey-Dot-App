@@ -276,7 +276,7 @@
 
     <!-- NIC Info -->
     <div class="nicInfo">
-      <div class="brightBig">{clientData.nicSelected.ip}</div>
+      <h3>{clientData.nicSelected.ip}</h3>
       <div>
         <div>Mask:</div>
         <div>{clientData.nicSelected.mask}</div>
@@ -362,7 +362,7 @@
             on:click={() => presetChangeToDHCP()}
             class={"DHCP" === clientData.presetSelected.name ? "presetSelected" : ""}
           >
-            <span>DHCP</span>
+            <h3>DHCP</h3>
             <span>Request an address</span>
             {#if "DHCP" === clientData.presetSelected.name}              
               <div class="checkmark">
@@ -375,7 +375,7 @@
               on:click={() => presetChange(preset)}
               class={preset.name === clientData.presetSelected.name ? "presetSelected" : ""}
             >
-              <span>{preset.ip}</span>
+              <h3>{preset.ip}</h3>
               <span>Mask: {preset.mask}</span>
               {#if preset.gateway}
                 <span>Gate: {preset.gateway}</span>
@@ -397,13 +397,13 @@
       <!-- Preset Table View -->
       {:else if clientData.presetViewMode === "table"}
         <div class="presetTable">
-          <button>
+          <div>
             <span>IP</span>
             <span>Mask</span>
             <span>Gateway</span>
             <span>DNS1</span>
             <span>DNS2</span>
-          </button>
+          </div>
           <button
             on:click={() => presetChangeToDHCP()}
             class={"DHCP" === clientData.presetSelected.name ? "presetSelected" : ""}
@@ -481,7 +481,7 @@
     align-content: flex-start;
     gap: var(--gap);
   }
-  /* If width is less than 800px */
+  /* If width is less than max-width */
   @media (max-width: 55rem) {
     article {
       display: flex;
@@ -503,10 +503,6 @@
     font-family: var(--font-mono);
     font-size: 0.9rem;
     /* gap: var(--pad); */
-  }
-  .nicInfo div.brightBig {
-    color: var(--color-text-bright);
-    font-size: 1.2rem
   }
   .nicInfo div.bright {
     color: var(--color-text-bright);
@@ -567,13 +563,6 @@
     color: var(--color-text-dim);
     position: relative;
   }
-  .presetButtons button span:first-child {
-    text-align: left;
-    display: grid;
-    gap: var(--gap);
-    font-size: 1.2rem;
-    color: var(--color-text-bright);
-  }
 
   /* Preset Table */
   .presetTable {
@@ -592,26 +581,31 @@
     color: var(--color-text);
     width: fit-content;
   }
-  .presetTable button:nth-child(1) {
+  .presetTable > div {
+    display: flex;
+    gap: var(--gap);
+    position: relative;
+    background-color: var(--color-bg);
+    width: fit-content;
     color: var(--color-text-bright);
-    border-radius: 0;
+    padding: var(--pad);
     border-bottom: var(--border);
     margin-bottom: .25rem;
   }
-  .presetTable button span:nth-child(1) {
+  .presetTable * span:nth-child(1) {
     width: 7.4rem;
     margin-left: 2rem;
   }
-  .presetTable button span:nth-child(2) {
+  .presetTable * span:nth-child(2) {
     width: 7.4rem;
   }
-  .presetTable button span:nth-child(3) {
+  .presetTable * span:nth-child(3) {
     width: 7.4rem;
   }
-  .presetTable button span:nth-child(4) {
+  .presetTable * span:nth-child(4) {
     width: 7.4rem;
   }
-  .presetTable button span:nth-child(5) {
+  .presetTable * span:nth-child(5) {
     width: 7.4rem;
   }
   .presetTable .presetSelected {
@@ -632,6 +626,9 @@
     color: var(--color-text-dim);
   }
   @media (hover: hover) {
+    .presetTable button:hover {
+      background-color: var(--color-bg-section);
+    }
     .presetTable button:hover {
       background-color: var(--color-bg-section);
     }
