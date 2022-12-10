@@ -207,9 +207,17 @@ textarea {
   background-color: var(--color-bg-input);
   /* line-height: 1.2; */
   
+  /* prevent selecting text */
+  user-select: none;
+  -webkit-user-select: none;
+}
+a,
+input,
+button,
+select,
+textarea {
   /* stop double click zoom on iOS */
   touch-action: manipulation;
-  
   /* stop browser click feedback */
   -webkit-tap-highlight-color: transparent;
 }

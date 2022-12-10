@@ -136,6 +136,9 @@
 
 <!-- CSS -->
 <style>
+  section {
+    padding: 0;
+  }
   .terminal {
     background-color: var(--color-bg);
     border: var(--border);
