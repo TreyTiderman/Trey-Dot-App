@@ -7,15 +7,15 @@
 </script>
 
 <!-- HTML -->
-<section>
+<article>
   <button>1</button>
   <button>2</button>
   <button>3</button>
-</section>
+</article>
 
 <!-- CSS -->
 <style>
-  section {
+  article {
     padding: var(--gap);
     max-width: 1200px;
     margin: auto;

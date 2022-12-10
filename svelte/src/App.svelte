@@ -5,10 +5,6 @@
   import Router, { location, querystring } from 'svelte-spa-router'
   import { wrap } from 'svelte-spa-router/wrap'
 
-  // Theme
-  import "./themes/light.css"
-  import "./themes/test.css"
-
   // Components
   import Header from './layout/Header.svelte'
   import Nav from './layout/Nav.svelte'
@@ -36,7 +32,7 @@
         items.push(subItems)
       }
       
-      // Recusive
+      // Recursive
       let items2 = items.find(navItem => navItem.name === split[0]).subItems
       addToNavItems(items2, split.slice(1), urlPath)
 

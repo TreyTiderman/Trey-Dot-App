@@ -397,7 +397,7 @@ tr:hover {
 /* Focus */
 @media (hover: hover) {
   :focus-visible {
-    box-shadow: inset 0px 0px 0px 2px var(--color-text-bright);
+    box-shadow: inset 0px 0px 0px 1.5px var(--color-text-bright), inset 0px 0px 0px 3px var(--color-bg);
     filter: var(--filter-brightness-hover);
   }
 }

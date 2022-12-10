@@ -27,93 +27,83 @@
 
   <!-- Set IP -->
   <div class="grid">
-    <div>
-      <label>
-        IP address <br>
-        <input type="text"
-          bind:value={data.value.ip}
-          on:keyup={event => { if (event.key === "p") data.value.ip = data.placeholder.ip }}
-          class:error={!validIPv4(data.value.ip) && data.value.ip !== ""}
-          placeholder={data.placeholder.ip}> <br>
-        {#if !validIPv4(data.value.ip) && data.value.ip !== ""}
-          <div class="flex error-message">
-            <Icon name="circle-exclamation"/>
-            <small>{validIPv4(data.value.ip, true)}</small>
-          </div>
-        {/if}
-      </label>
-    </div>
-    <div>
-      <label>
-        Subnet Mask <br>
-        <input type="text"
-          bind:value={data.value.mask}
-          on:keyup={event => { if (event.key === "p") data.value.mask = data.placeholder.mask }}
-          class:error={!validMask(data.value.mask) && data.value.mask !== ""}
-          placeholder={data.placeholder.mask}> <br>
-        {#if !validMask(data.value.mask) && data.value.mask !== ""}          
-          <div class="flex error-message">
-            <Icon name="circle-exclamation"/>
-            <small>{validMask(data.value.mask, true)}</small>
-          </div>
-        {/if}
-      </label>
-    </div>
-    <div>
-      <label>
-        Gateway <br>
-        <input type="text"
-          bind:value={data.value.gateway}
-          on:keyup={event => { if (event.key === "p") data.value.gateway = data.placeholder.gateway }}
-          class:error={!validIPv4(data.value.gateway) && data.value.gateway !== ""}
-          placeholder={data.placeholder.gateway}> <br>
-        {#if !validIPv4(data.value.gateway) && data.value.gateway !== ""}          
-          <div class="flex error-message">
-            <Icon name="circle-exclamation"/>
-            <small>{validIPv4(data.value.gateway, true)}</small>
-          </div>
-        {/if}
-      </label>
-    </div>
+    <label>
+      IP address <br>
+      <input type="text"
+        bind:value={data.value.ip}
+        on:keyup={event => { if (event.key === "p") data.value.ip = data.placeholder.ip }}
+        class:error={!validIPv4(data.value.ip) && data.value.ip !== ""}
+        placeholder={data.placeholder.ip}> <br>
+      {#if !validIPv4(data.value.ip) && data.value.ip !== ""}
+        <div class="flex error-message">
+          <Icon name="circle-exclamation"/>
+          <small>{validIPv4(data.value.ip, true)}</small>
+        </div>
+      {/if}
+    </label>
+    <label>
+      Subnet Mask <br>
+      <input type="text"
+        bind:value={data.value.mask}
+        on:keyup={event => { if (event.key === "p") data.value.mask = data.placeholder.mask }}
+        class:error={!validMask(data.value.mask) && data.value.mask !== ""}
+        placeholder={data.placeholder.mask}> <br>
+      {#if !validMask(data.value.mask) && data.value.mask !== ""}          
+        <div class="flex error-message">
+          <Icon name="circle-exclamation"/>
+          <small>{validMask(data.value.mask, true)}</small>
+        </div>
+      {/if}
+    </label>
+    <label>
+      Gateway <br>
+      <input type="text"
+        bind:value={data.value.gateway}
+        on:keyup={event => { if (event.key === "p") data.value.gateway = data.placeholder.gateway }}
+        class:error={!validIPv4(data.value.gateway) && data.value.gateway !== ""}
+        placeholder={data.placeholder.gateway}> <br>
+      {#if !validIPv4(data.value.gateway) && data.value.gateway !== ""}          
+        <div class="flex error-message">
+          <Icon name="circle-exclamation"/>
+          <small>{validIPv4(data.value.gateway, true)}</small>
+        </div>
+      {/if}
+    </label>
   </div>
   
   <!-- Set DNS -->
   <div class="grid">
-    <div>
-      <label>
-        DNS 1 <br>
-        <input type="text"
-          bind:value={data.value.dns[0]}
-          on:keyup={event => { if (event.key === "p") data.value.dns[0] = data.placeholder.dns[0] }}
-          class:error={!validIPv4(data.value.dns[0]) && data.value.dns[0] !== ""}
-          class:correct={validIPv4(data.value.dns[0])}
-          placeholder={data.placeholder.dns[0]}> <br>
-        {#if !validIPv4(data.value.dns[0]) && data.value.dns[0] !== ""}          
-          <div class="flex error-message">
-            <Icon name="circle-exclamation"/>
-            <small>{validIPv4(data.value.dns[0], true)}</small>
-          </div>
-        {/if}
-      </label>
-    </div>
-    <div>
-      <label>
-        DNS 2 <br>
-        <input type="text"
-          bind:value={data.value.dns[1]}
-          on:keyup={event => { if (event.key === "p") data.value.dns[1] = data.placeholder.dns[1] }}
-          class:error={!validIPv4(data.value.dns[1]) && data.value.dns[1] !== ""}
-          placeholder={data.placeholder.dns[1]}> <br>
-        {#if !validIPv4(data.value.dns[1]) && data.value.dns[1] !== ""}          
-          <div class="flex error-message">
-            <Icon name="circle-exclamation"/>
-            <small>{validIPv4(data.value.dns[1], true)}</small>
-          </div>
-        {/if}
-      </label>
-    </div>
     <label>
-       <br>
+      DNS 1 <br>
+      <input type="text"
+        bind:value={data.value.dns[0]}
+        on:keyup={event => { if (event.key === "p") data.value.dns[0] = data.placeholder.dns[0] }}
+        class:error={!validIPv4(data.value.dns[0]) && data.value.dns[0] !== ""}
+        class:correct={validIPv4(data.value.dns[0])}
+        placeholder={data.placeholder.dns[0]}> <br>
+      {#if !validIPv4(data.value.dns[0]) && data.value.dns[0] !== ""}          
+        <div class="flex error-message">
+          <Icon name="circle-exclamation"/>
+          <small>{validIPv4(data.value.dns[0], true)}</small>
+        </div>
+      {/if}
+    </label>
+    <label>
+      DNS 2 <br>
+      <input type="text"
+        bind:value={data.value.dns[1]}
+        on:keyup={event => { if (event.key === "p") data.value.dns[1] = data.placeholder.dns[1] }}
+        class:error={!validIPv4(data.value.dns[1]) && data.value.dns[1] !== ""}
+        placeholder={data.placeholder.dns[1]}> <br>
+      {#if !validIPv4(data.value.dns[1]) && data.value.dns[1] !== ""}          
+        <div class="flex error-message">
+          <Icon name="circle-exclamation"/>
+          <small>{validIPv4(data.value.dns[1], true)}</small>
+        </div>
+      {/if}
+    </label>
+    <label>
+      <br>
       <div class="buttons">
         <button class="green"
           on:click={() => {

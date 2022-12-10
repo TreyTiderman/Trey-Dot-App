@@ -1,4 +1,4 @@
-html.test {
+html.purple {
   color-scheme: dark;
 
   /* Text */
@@ -28,8 +28,10 @@ html.test {
   
   --color-bg-highlight: var(--color-purple-500);
   --color-text-highlight: var(--color-purple-100);
-  
+
   --color-border: var(--color-bg-input);
+  --color-border-header: var(--color-bg-input);
+  --color-border-section: var(--color-bg-input);
   --color-shadow: #00000099;
 
   /* Filters for hover, disable, active */

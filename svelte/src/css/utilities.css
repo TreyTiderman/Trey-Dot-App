@@ -70,13 +70,13 @@
 .flex.grow-3 { flex: 3 0 0%; }
 
 /* Wrap to one element per line at break point */
-@media (max-width: 550px) {
+@media (max-width: 34rem) {
   .flex.break-md > * { flex: 0 1 100% !important; }
 }
-@media (max-width: 960px) {
+@media (max-width: 60rem) {
   .flex.break-lg > * { flex: 0 1 100% !important; }
 }
-@media (max-width: 1280px) {
+@media (max-width: 80rem) {
   .flex.break-xl > * { flex: 0 1 100% !important; }
 }
 
@@ -89,10 +89,10 @@
 
 .grid.center { place-items: center; }
 
-.grid.auto-xs { grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); }
-.grid.auto-sm { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
-.grid.auto-md { grid-template-columns: repeat(auto-fit, minmax(min(390px, 100%), 1fr)); }
-.grid.auto-lg { grid-template-columns: repeat(auto-fit, minmax(min(595px, 100%), 1fr)); }
+.grid.auto-xs { grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr)); }
+.grid.auto-sm { grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
+.grid.auto-md { grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); }
+.grid.auto-lg { grid-template-columns: repeat(auto-fit, minmax(min(36rem, 100%), 1fr)); }
 
 /* Alignment for both Flex and Grid */
 .align-end             { align-items: flex-end; }

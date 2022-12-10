@@ -261,7 +261,7 @@
 <article>
 
   <!-- Server Interfaces -->
-  <aside>
+  <aside class="grid">
     <h2>Server Interfaces</h2>
 
     <!-- NIC Select -->
@@ -321,7 +321,7 @@
   </aside>
 
   <!-- Preset Actions + Presets -->
-  <section>
+  <section class="grid">
 
     <!-- Preset Actions -->
     <div class="actions">
@@ -457,42 +457,32 @@
 <!-- CSS -->
 <style>
 
-  /* Layout */
+  /* Sidebar */
   article {
     height: 100%;
     overflow: auto;
     display: flex;
   }
   aside {
-    min-width: 16rem;
+    min-width: 300px;
     padding: var(--gap);
     border-right: var(--border);
-    border-color: var(--color-bg-header);
-
-    display: grid;
-    align-content: flex-start;
-    gap: var(--gap);
+    border-color: var(--color-border-section);
   }
   section {
     flex-grow: 1;
     padding: var(--gap);
-
-    display: grid;
-    align-content: flex-start;
-    gap: var(--gap);
   }
-  /* If width is less than max-width */
-  @media (max-width: 55rem) {
-    article {
+  @media (max-width: 60rem) {
+    article { 
       display: flex;
       flex-direction: column;
     }
     aside {
-      flex-grow: 1;
       padding: var(--gap);
       border-right: none;
       border-bottom: var(--border);
-      border-color: var(--color-bg-header);
+      border-color: var(--color-border-section);
     }
   }
 

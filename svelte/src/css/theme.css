@@ -15,7 +15,7 @@ html {
 
   /* Colors */
   --color-bg: var(--color-grey-50);
-  --color-bg-header: var(--color-grey-200);
+  --color-bg-header: var(--color-grey-100);
   --color-bg-section: var(--color-grey-100);
   --color-bg-dim: var(--color-grey-200);
 
@@ -31,6 +31,8 @@ html {
   --color-text-highlight: var(--color-purple-100);
   
   --color-border: var(--color-bg-input);
+  --color-border-header: var(--color-bg-input);
+  --color-border-section: var(--color-bg-input);
   --color-shadow: #00000099;
 
   /* Filters for hover, disable, active */

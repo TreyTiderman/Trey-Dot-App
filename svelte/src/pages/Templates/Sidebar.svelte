@@ -8,11 +8,11 @@
 
 <!-- HTML -->
 <article>
-  <aside>
+  <aside class="grid">
     <h2>aside</h2>
     <!-- Put content here -->
   </aside>
-  <section>
+  <section class="grid">
     <h2>section</h2>
     <!-- Put content here -->
   </section>
@@ -21,32 +21,23 @@
 <!-- CSS -->
 <style>
 
-  /* Flex + Widths */
+  /* Sidebar */
   article {
     height: 100%;
     overflow: auto;
     display: flex;
   }
   aside {
-    min-width: 300px;
+    min-width: 20rem;
     padding: var(--gap);
     border-right: var(--border);
-    border-color: var(--color-bg-header);
-
-    display: grid;
-    align-content: flex-start;
-    gap: var(--gap);
+    border-color: var(--color-border-section);
   }
   section {
     flex-grow: 1;
     padding: var(--gap);
-
-    display: grid;
-    align-content: flex-start;
-    gap: var(--gap);
   }
-
-  @media (max-width: 800px) {
+  @media (max-width: 50rem) {
     article { 
       display: flex;
       flex-direction: column;
@@ -55,14 +46,11 @@
       padding: var(--gap);
       border-right: none;
       border-bottom: var(--border);
-      border-color: var(--color-bg-header);
+      border-color: var(--color-border-section);
     }
   }
 
-  /* Max width if wanted */
-  /* article {
-    max-width: 1200px;
-    margin: auto;
-  } */
+  /* Page Styles */
+  
 
 </style>

@@ -151,39 +151,38 @@
 <!-- CSS -->
 <style>
 
-  /* Layout */
+  /* Sidebar */
   article {
     height: 100%;
     overflow: auto;
     display: flex;
   }
   aside {
-    max-width: 26rem;
-    min-width: 24rem;
+    width: 26rem;
+    flex-grow: 0;
+    flex-shrink: 0;
     padding: var(--gap);
     border-right: var(--border);
-    border-color: var(--color-bg-header);
+    border-color: var(--color-border-section);
   }
   section {
-    flex-grow: 100;
+    flex-grow: 1;
     padding: var(--gap);
   }
-  /* If width is less than max-width */
-  @media (max-width: 65rem) {
-    article {
+  @media (max-width: 60rem) {
+    article { 
       display: flex;
       flex-direction: column;
     }
     aside {
-      max-width: none;
-      flex-grow: 1;
+      width: auto;
       padding: var(--gap);
       border-right: none;
       border-bottom: var(--border);
-      border-color: var(--color-bg-header);
+      border-color: var(--color-border-section);
     }
   }
-  
+    
   h2 button {
     display: flex;
     gap: var(--pad);

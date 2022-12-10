@@ -15,7 +15,7 @@
 
     // Available ports
     // const availablePortsResponse = await get("/api/serial/v1/availablePorts", "http://192.168.1.9:4620")
-    const availablePortsResponse = await get("/api/serial/v1/availablePorts")
+    // const availablePortsResponse = await get("/api/serial/v1/availablePorts")
     // Remove ports that don't have a serial number
     availablePortsResponse.forEach(port => {
       if (port.serialNumber !== undefined) availablePorts = [...availablePorts, port];
@@ -27,11 +27,11 @@
     if (availablePorts.length > 0) {
       const body = { "path": devicePath }
       // port = await post("/api/serial/v1/port", body, "http://192.168.1.9:4620")
-      port = await post("/api/serial/v1/port", body)
+      // port = await post("/api/serial/v1/port", body)
       setInterval(async () => {
         const body = { "path": devicePath }
         // port = await post("/api/serial/v1/port", body, "http://192.168.1.9:4620")
-        port = await post("/api/serial/v1/port", body)
+        // port = await post("/api/serial/v1/port", body)
       }, 1 * 1000)
     }
 
@@ -60,12 +60,12 @@
       "delimiter": delimiter
     }
     // const openResponse = await post("/api/serial/v1/open", body, "http://192.168.1.9:4620")
-    const openResponse = await post("/api/serial/v1/open", body)
+    // const openResponse = await post("/api/serial/v1/open", body)
   }
   async function closeConnection(path) {
     const body = { "path": path }
     // const openResponse = await post("/api/serial/v1/close", body, "http://192.168.1.9:4620")
-    const openResponse = await post("/api/serial/v1/close", body)
+    // const openResponse = await post("/api/serial/v1/close", body)
   }
   async function toggleConnectionClick() {
     if (port.isOpen) closeConnection(devicePath)
@@ -85,7 +85,7 @@
       "lf": false
     }
     // const sendResponse = await post("/api/serial/v1/send", body, "http://192.168.1.9:4620")
-    const sendResponse = await post("/api/serial/v1/send", body)
+    // const sendResponse = await post("/api/serial/v1/send", body)
   }
   
   // Terminal lines
@@ -130,7 +130,7 @@
 <article>
 
   <!-- Connection Settings -->
-  <aside>
+  <aside class="grid">
     <h2>Connection Settings</h2>
     {#if availablePorts.length === 0 && doneLoading}
       <div>
@@ -191,7 +191,7 @@
   </aside>
 
   <!-- Terminal -->
-  <section>
+  <section class="grid">
     <h2>Terminal</h2>
     <Terminal lines={lines}/>
 
@@ -216,11 +216,8 @@
 
 <!-- CSS -->
 <style>
-  /* Max width if wanted */
-  /* article {
-    max-width: 1200px;
-    margin: auto;
-  } */
+
+  /* Sidebar */
   article {
     height: 100%;
     overflow: auto;
@@ -230,33 +227,22 @@
     min-width: 300px;
     padding: var(--gap);
     border-right: var(--border);
-    border-color: var(--color-bg-header);
-
-    display: grid;
-    align-content: flex-start;
-    gap: var(--gap);
+    border-color: var(--color-border-section);
   }
   section {
     flex-grow: 1;
     padding: var(--gap);
-
-    display: grid;
-    align-content: flex-start;
-    gap: var(--gap);
   }
-
-  /* If width is less than 800px */
-  @media (max-width: 800px) {
-    article {
+  @media (max-width: 60rem) {
+    article { 
       display: flex;
       flex-direction: column;
     }
     aside {
-      flex-grow: 1;
       padding: var(--gap);
       border-right: none;
       border-bottom: var(--border);
-      border-color: var(--color-bg-header);
+      border-color: var(--color-border-section);
     }
   }
 
