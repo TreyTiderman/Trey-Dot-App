@@ -76,13 +76,6 @@
     border-radius: var(--radius);
     background-color: var(--color-text);
   }
-  input[type=range]:focus {
-    outline: none;
-  }
-  input[type=range]:disabled {
-    filter: var(--filter-brightness-disable);
-    cursor: not-allowed;
-  }
   label {
     display: flex;
     /* border: 1px solid red; */

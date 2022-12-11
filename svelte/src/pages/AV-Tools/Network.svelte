@@ -258,6 +258,8 @@
 
   })
 
+  $: console.log(clientData.showSetIP)
+
 </script>
 
 <!-- HTML -->
