@@ -41,7 +41,7 @@
 <!-- CSS -->
 <style>
   header {
-    color: var(--color-text-header);
+    color: var(--color-text-bright);
     background-color: var(--color-bg-header);
   
     overflow-x: auto;
@@ -52,22 +52,20 @@
 
     border-bottom: var(--border);
     border-color: var(--color-border-header);
+    height: 4.2rem;
   }
   header h2 {
-    color: var(--color-text-header);
+    color: var(--color-text-bright);
   }
   header button {
-    color: var(--color-text-header);
+    color: var(--color-text-bright);
     height: 4.2rem;
     border-radius: 0;
     padding: var(--gap);
     background-color: transparent;
   }
   header select {
-    color: var(--color-text-header);
-    /* height: 4.2rem; */
-    /* border-radius: 0; */
-    /* background-color: transparent; */
+    color: var(--color-text-bright);
     margin-right: 1rem;
     margin-left: auto;
   }

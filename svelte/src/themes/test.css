@@ -21,7 +21,6 @@ html.test {
   --color-text: var(--color-grey-700);
   --color-text-bright: var(--color-grey-900);
   --color-text-dim: var(--color-grey-600);
-  --color-text-header: var(--color-text-bright);
   
   --color-bg-input: var(--color-text-bright);
   --color-text-input: var(--color-bg);

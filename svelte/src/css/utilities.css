@@ -123,3 +123,11 @@
 .overflow { overflow: auto; }
 .fill { width: 100%; }
 .mono { font-family: var(--font-mono); }
+.error {
+  box-shadow: inset 0px 0px 0px 2px var(--color-bg-red);
+}
+.error-message {
+  margin-top: var(--pad);
+  gap: var(--pad);
+  color: var(--color-bg-red);
+}

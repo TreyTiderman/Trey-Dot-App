@@ -5,28 +5,28 @@
   import { router } from "../js/global.js"
 
   // Components
-  import Icon from '../components/Icon.svelte'
+  import Icon from './Icon.svelte'
 
   // Exports
-  export let pageObj
-  export let title = "Title"
+  export let show = true
+  export let title
   export let closeIcon = true
 
-  // Variables
-  let isDown
-  var mousePositionStart
-  let mousePositionOffset
-  let mainTranslate = {x: 0, y: 0}
-  let dialogElement
-  let mainElement
 
   // Functions
   export function close() {
-    $router.dialogObj = null
+    show = false
   }
   function closeIfBackground(event) {
     if (event.target.localName === 'dialog') close()
   }
+
+  // Moveable
+  let isDown
+  let mousePositionStart
+  let mousePositionOffset
+  let mainTranslate = {x: 0, y: 0}
+  let mainElement
   function mousedown(event) {
     isDown = true
     mousePositionStart = {
@@ -64,25 +64,24 @@
 </script>
 
 <!-- HTML -->
-{#if pageObj}
-<dialog 
-  bind:this={dialogElement}
-  on:mousedown={closeIfBackground}
-  on:mouseup={mouseup}
-  on:mouseleave={mouseup}
-  on:mousemove={mousemove}
->
-  <main style={$$props.style} bind:this={mainElement}>
-  <h2
-    on:mousedown={mousedown}
-  >{title}</h2>
-  {#if closeIcon}
-    <button class="dialogExit" on:click={close}>
-      <Icon name="xmark"/>
-    </button>
-  {/if}
-  <svelte:component this={pageObj.pageComponent}/>
-</dialog>
+{#if show}
+  <dialog
+    on:mousedown={closeIfBackground}
+    on:mouseup={mouseup}
+    on:mouseleave={mouseup}
+    on:mousemove={mousemove}>
+    <main style={$$props.style} bind:this={mainElement}>
+      {#if title}
+        <h2 on:mousedown={mousedown}>{title}</h2>
+        {#if closeIcon}
+          <button class="dialogExit" on:click={close}>
+            <Icon name="xmark"/>
+          </button>
+        {/if}
+      {/if}
+      <slot/>
+    </main>
+  </dialog>
 {/if}
 
 <!-- CSS -->
@@ -164,7 +163,7 @@
     padding: var(--gap);
     /* padding-bottom: calc(var(--pad)/2); */
   }
-  /* If width is less than 800px */
+  /* If width is less than 55rem */
   @media (max-width: 55rem) {
     main {
       display: flex;

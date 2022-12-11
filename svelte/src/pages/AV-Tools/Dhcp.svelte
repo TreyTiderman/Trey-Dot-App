@@ -1,11 +1,31 @@
 <!-- Javascript -->
 <script>
+  import { validIPv4, validMask, validLeasePeriod } from "../../js/helper.js"
 
   // Import Components
   import Icon from '../../components/Icon.svelte'
 
+  // Data
   const data = {
     running: false,
+    value: {
+      ip: "192.168.1.9",
+      mask: "255.255.255.0",
+      gateway: "192.168.1.1",
+      dns: ["192.168.1.1", "1.1.1.1"],
+      rangeStart: "192.168.1.100",
+      rangeEnd: "192.168.1.199",
+      leasePeriod_sec: 3600,
+    },
+    placeholder: {
+      ip: "192.168.1.9",
+      mask: "255.255.255.0",
+      gateway: "192.168.1.1",
+      dns: ["192.168.1.1", "1.1.1.1"],
+      rangeStart: "192.168.1.100",
+      rangeEnd: "192.168.1.199",
+      leasePeriod_sec: 3600,
+    },
     clientsViewMode: "cards",
     clients: [
       {
@@ -23,19 +43,27 @@
         mac: "00:D8:61:1A:8E:7B",
         expires: "Address offered"
       },
-    ]
+    ],
   }
 
   // Functions
   function changeClientsViewMode() {
     if      (data.clientsViewMode === "cards")  data.clientsViewMode = "table"
-    else if (data.clientsViewMode === "table")    data.clientsViewMode = "cards"
-    else                                          data.clientsViewMode = "table"
+    else if (data.clientsViewMode === "table")  data.clientsViewMode = "cards"
+    else                                        data.clientsViewMode = "table"
     console.log("Clients View Mode Changed to", data.clientsViewMode)
+  }
+  function startDhcpServer() {
+    data.running = true
+    console.log("DHCP Server Started")
+  }
+  function stopDhcpServer() {
+    data.running = false
+    console.log("DHCP Server Stopped")
   }
 
   // Component Startup
-  import { onMount } from 'svelte';
+  import { onMount } from 'svelte'
   let doneLoading = false
   onMount(async () => {
 
@@ -59,11 +87,21 @@
     <!-- On / Off -->
     <div class="flex even">
       <button class="dim" class:green={data.running}
-        on:click={() => data.running = true}>
+        disabled={!(
+          validIPv4(data.value.ip) &&
+          validIPv4(data.value.rangeStart) &&
+          validIPv4(data.value.rangeEnd) &&
+          validMask(data.value.mask) &&
+          validIPv4(data.value.gateway) &&
+          validIPv4(data.value.dns[0]) &&
+          validIPv4(data.value.dns[1]) &&
+          validLeasePeriod(data.value.leasePeriod_sec)
+        )}
+        on:click={startDhcpServer}>
         {data.running ? "Running..." : "Start"}
       </button>
       <button class="dim" class:red={!data.running}
-        on:click={() => data.running = false}>
+        on:click={stopDhcpServer}>
         {data.running ? "Stop" : "Off"}
       </button>
     </div>
@@ -73,49 +111,113 @@
       <div class="flex even break-md">
         <label>
           Computer's static IP <br>
-          <input type="text" class="fill mono" 
-            placeholder="192.168.1.9" value="192.168.1.9">
+          <input type="text" class="fill mono"
+            class:error={!validIPv4(data.value.ip) && data.value.ip !== ""}
+            on:keyup={event => { if (event.key === "p") data.value.ip = data.placeholder.ip }}
+            bind:value={data.value.ip} placeholder={data.placeholder.ip}>
+          {#if !validIPv4(data.value.ip) && data.value.ip !== ""}
+            <div class="flex error-message">
+              <Icon name="circle-exclamation"/>
+              <small>{validIPv4(data.value.ip, true)}</small>
+            </div>
+          {/if}
         </label>
         <label>
           Lease Period (sec) <br>
-          <input type="number" class="fill mono" 
-            placeholder="3600" value="3600">
+          <input type="number" class="fill mono"
+            class:error={!validLeasePeriod(data.value.leasePeriod_sec) && data.value.leasePeriod_sec !== null}
+            on:keyup={event => { if (event.key === "p") data.value.leasePeriod_sec = data.placeholder.leasePeriod_sec }}
+            bind:value={data.value.leasePeriod_sec} placeholder={data.placeholder.leasePeriod_sec}>
+          {#if !validLeasePeriod(data.value.leasePeriod_sec) && data.value.leasePeriod_sec !== null}
+            <div class="flex error-message">
+              <Icon name="circle-exclamation"/>
+              <small>{validLeasePeriod(data.value.leasePeriod_sec, true)}</small>
+            </div>
+          {/if}
         </label>
       </div>
       <div class="flex even break-md">
         <label>
           Range Start <br>
-          <input type="text" id="rangeStart" class="fill mono" 
-            placeholder="192.168.1.100" value="192.168.1.100">
+          <input type="text" class="fill mono"
+            class:error={!validIPv4(data.value.rangeStart) && data.value.rangeStart !== null}
+            on:keyup={event => { if (event.key === "p") data.value.rangeStart = data.placeholder.rangeStart }}
+            bind:value={data.value.rangeStart} placeholder={data.placeholder.rangeStart}>
+          {#if !validIPv4(data.value.rangeStart) && data.value.rangeStart !== null}
+            <div class="flex error-message">
+              <Icon name="circle-exclamation"/>
+              <small>{validIPv4(data.value.rangeStart, true)}</small>
+            </div>
+          {/if}
         </label>
         <label>
           Range End <br>
-          <input type="text" id="rangeEnd" class="fill mono" 
-            placeholder="192.168.1.199" value="192.168.1.199">
+          <input type="text" class="fill mono"
+            class:error={!validIPv4(data.value.rangeEnd) && data.value.rangeEnd !== null}
+            on:keyup={event => { if (event.key === "p") data.value.rangeEnd = data.placeholder.rangeEnd }}
+            bind:value={data.value.rangeEnd} placeholder={data.placeholder.rangeEnd}>
+          {#if !validIPv4(data.value.rangeEnd) && data.value.rangeEnd !== null}
+            <div class="flex error-message">
+              <Icon name="circle-exclamation"/>
+              <small>{validIPv4(data.value.rangeEnd, true)}</small>
+            </div>
+          {/if}
         </label>
       </div>
       <div class="flex even break-md">
         <label>
           Subnet Mask <br>
-          <input type="text" id="mask" class="fill mono" 
-            placeholder="255.255.255.0" value="255.255.255.0">
+          <input type="text" class="fill mono"
+            class:error={!validMask(data.value.mask) && data.value.mask !== null}
+            on:keyup={event => { if (event.key === "p") data.value.mask = data.placeholder.mask }}
+            bind:value={data.value.mask} placeholder={data.placeholder.mask}>
+          {#if !validMask(data.value.mask) && data.value.mask !== null}
+            <div class="flex error-message">
+              <Icon name="circle-exclamation"/>
+              <small>{validMask(data.value.mask, true)}</small>
+            </div>
+          {/if}
         </label>
         <label>
           Gateway <br>
-          <input type="text" id="gateway" class="fill mono" 
-            placeholder="192.168.1.1" value="192.168.1.254">
+          <input type="text" class="fill mono" 
+            class:error={!validIPv4(data.value.gateway) && data.value.gateway !== null}
+            on:keyup={event => { if (event.key === "p") data.value.gateway = data.placeholder.gateway }}
+            bind:value={data.value.gateway} placeholder={data.placeholder.gateway}>
+          {#if !validIPv4(data.value.gateway) && data.value.gateway !== null}
+            <div class="flex error-message">
+              <Icon name="circle-exclamation"/>
+              <small>{validIPv4(data.value.gateway, true)}</small>
+            </div>
+          {/if}
         </label>
       </div>
       <div class="flex even break-md">
         <label>
           DNS 1 <br>
-          <input type="text" id="dns1" class="fill mono" 
-            placeholder="192.168.1.1" value="192.168.1.1">
+          <input type="text" class="fill mono" 
+            class:error={!validIPv4(data.value.dns[0]) && data.value.dns[0] !== null}
+            on:keyup={event => { if (event.key === "p") data.value.dns[0] = data.placeholder.dns[0] }}
+            bind:value={data.value.dns[0]} placeholder={data.placeholder.dns[0]}>
+          {#if !validIPv4(data.value.dns[0]) && data.value.dns[0] !== null}
+            <div class="flex error-message">
+              <Icon name="circle-exclamation"/>
+              <small>{validIPv4(data.value.dns[0], true)}</small>
+            </div>
+          {/if}
         </label>
         <label>
           DNS 2 <br>
-          <input type="text" id="dns2" class="fill mono" 
-            placeholder="1.1.1.1" value="1.1.1.1">
+          <input type="text" class="fill mono" 
+            class:error={!validIPv4(data.value.dns[1]) && data.value.dns[1] !== null}
+            on:keyup={event => { if (event.key === "p") data.value.dns[1] = data.placeholder.dns[1] }}
+            bind:value={data.value.dns[1]} placeholder={data.placeholder.dns[1]}>
+          {#if !validIPv4(data.value.dns[1]) && data.value.dns[1] !== null}
+            <div class="flex error-message">
+              <Icon name="circle-exclamation"/>
+              <small>{validIPv4(data.value.dns[1], true)}</small>
+            </div>
+          {/if}
         </label>
       </div> 
     </div>
@@ -128,7 +230,6 @@
         <Icon name="arrows-rotate" size=.8 style="display: inline;" color="var(--color-text-dim)"/>
       </button>
     </h2>
-        
     <div class="flex mono {data.clientsViewMode}">
       {#if data.clientsViewMode === "table"}        
         <div>
@@ -158,7 +259,7 @@
     display: flex;
   }
   aside {
-    width: 26rem;
+    width: 30rem;
     flex-grow: 0;
     flex-shrink: 0;
     padding: var(--gap);
@@ -191,6 +292,7 @@
     border-radius: 0;
   }
   
+  /* Cards */
   .cards > div {
     padding: var(--gap);
     border-radius: var(--radius);
@@ -201,6 +303,8 @@
     color: var(--color-text-bright);
     font-size: 1.2rem;
   }
+
+  /* Table */
   .table {
     display: grid;
     align-content: flex-start;
@@ -237,4 +341,5 @@
       background-color: var(--color-bg-section);
     }
   }
+
 </style>

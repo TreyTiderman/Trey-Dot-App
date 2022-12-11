@@ -1,9 +1,6 @@
 <!-- Javascript -->
 <script>
-
-  // Custom events
-  import { createEventDispatcher } from 'svelte'
-  const dispatch = createEventDispatcher()
+  import { location } from 'svelte-spa-router'
 
   // Components
   import Icon from '../components/Icon.svelte'
@@ -34,10 +31,8 @@
     style={`padding-left: calc(var(--gap)*${indent});`}
     on:click={() => navItem.show = !navItem.show}>
     {#if navItem.show}
-      <!-- <Icon name="caret-down" size={iconSize}/> -->
       <Icon name="folder-open" size={iconSize}/>
     {:else}
-      <!-- <Icon name="caret-right" size={iconSize}/> -->
       <Icon name="folder" size={iconSize}/>
     {/if}
     {navItem.name}
@@ -47,15 +42,15 @@
   {#if navItem.show}
     <div class="subItems">
       {#each navItem.subItems as subItem}
-        <svelte:self navItem={subItem} indent={indent + indentSubItem}/>
+        <svelte:self on:click navItem={subItem} indent={indent + indentSubItem}/>
       {/each}
     </div>
   {/if}
 
 <!-- Else add the navItem -->
 {:else if navItem?.name}
-  <a href={navItem.path} 
-    class:active={false}
+  <a on:click href={navItem.path} 
+    class:active={$location === navItem.path.slice(2)}
     style={`padding-left: calc(var(--gap)*${indent});`}>
     <Icon name="{navItem.icon}" size={iconSize} />
     {navItem.name}

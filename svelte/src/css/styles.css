@@ -206,7 +206,9 @@ textarea {
   color: var(--color-text-input);
   background-color: var(--color-bg-input);
   /* line-height: 1.2; */
-  
+}
+button,
+select {
   /* prevent selecting text */
   user-select: none;
   -webkit-user-select: none;

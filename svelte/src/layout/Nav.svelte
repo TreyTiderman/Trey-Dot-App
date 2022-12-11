@@ -1,6 +1,10 @@
 <!-- Javascript -->
 <script>
 
+  // Custom events
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
+
   // Components
   import NavItem from '../layout/NavItem.svelte'
 
@@ -81,7 +85,8 @@
 
     <!-- Add each navItems to the Nav -->
     {#each navItems as navItem}
-      <NavItem navItem={navItem}/>
+      <NavItem navItem={navItem} 
+        on:click={() => dispatch("itemPress", navItem)}/>
     {/each}
 
   </nav>

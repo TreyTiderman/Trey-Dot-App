@@ -2,8 +2,10 @@
 <script>
   import { router } from '../../js/global.js'
 
-  // Import Components
+  // Components
   import Icon from '../../components/Icon.svelte'
+  import Dialog from '../../components/Dialog.svelte'
+  import SetIP from '../../pages/AV-Tools/SetIP.svelte'
 
   // Data
   let serverData = {
@@ -70,6 +72,7 @@
     ]
 }
   let clientData = {
+    "showSetIP": false,
     "nicSelected": {
       "name": "Fake NIC",
       "interfaceMetric": "xx",
@@ -207,7 +210,7 @@
   }
   function actionNew() {
     console.log("Open Popup to create a preset")
-    $router.dialogObj = $router.pageObjs.SetIP
+    clientData.showSetIP = true
   }
   function actionSet() {
     console.log("Set current preset as network settings", clientData.presetSelected)
@@ -258,6 +261,9 @@
 </script>
 
 <!-- HTML -->
+<Dialog title="Set IP" show={clientData.showSetIP}>
+  <SetIP/>
+</Dialog>
 <article>
 
   <!-- Server Interfaces -->

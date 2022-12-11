@@ -150,8 +150,13 @@
     flex-wrap: wrap;
     gap: var(--gap);
     padding: var(--gap);
-    width: fit-content;
     align-content: flex-start;
+  }
+  @media (max-width: 40rem) {
+    article {
+      display: flex;
+      flex-direction: column;
+    }
   }
   .buttons {
     display: flex;
@@ -167,14 +172,6 @@
     justify-content: space-between;
     gap: var(--pad);
     flex: 1 0 0%;
-  }
-  .error {
-    box-shadow: inset 0px 0px 0px 2px var(--color-bg-red);
-  }
-  .error-message {
-    margin-top: var(--pad);
-    gap: var(--pad);
-    color: var(--color-bg-red);
   }
 
   input {
