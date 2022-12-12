@@ -1,4 +1,4 @@
-import{S as o,i as n,s as r,e as l,a as c,b as u,n as a,d as p}from"./index.ec567be7.js";function m(s){let e;return{c(){e=l("article"),e.innerHTML=`<h2>Heading h2</h2> 
+import{S as o,i as n,s as r,e as l,a as c,b as u,n as a,d as p}from"./index.a03b319b.js";function m(s){let e;return{c(){e=l("article"),e.innerHTML=`<h2>Heading h2</h2> 
   <p>Paragraph of text...
     Lorem ipsum dolor sit amet consectetur adipisicing elit. 
     Dolore doloribus nobis error repellat vitae, sit quasi 

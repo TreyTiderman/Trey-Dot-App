@@ -5,7 +5,7 @@
   // Import Components
   import Icon from '../../components/Icon.svelte'
 
-  const data = {
+  export let data = {
     value: {
       ip: "192.168.1.2",
       mask: "255.255.255.0",
@@ -29,7 +29,8 @@
   <div class="grid">
     <label>
       IP address <br>
-      <input type="text"
+      <!-- svelte-ignore a11y-autofocus -->
+      <input type="text" autofocus
         bind:value={data.value.ip}
         on:keyup={event => { if (event.key === "p") data.value.ip = data.placeholder.ip }}
         class:error={!validIPv4(data.value.ip) && data.value.ip !== ""}

@@ -1,8 +1,9 @@
 <!-- Javascript -->
 <script>
 
-  // Store
-  import { router } from "../js/global.js"
+  // Event Dispatcher
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
 
   // Components
   import Icon from './Icon.svelte'
@@ -11,15 +12,6 @@
   export let show = true
   export let title
   export let closeIcon = true
-
-
-  // Functions
-  export function close() {
-    show = false
-  }
-  function closeIfBackground(event) {
-    if (event.target.localName === 'dialog') close()
-  }
 
   // Moveable
   let isDown
@@ -66,20 +58,25 @@
 <!-- HTML -->
 {#if show}
   <dialog
-    on:mousedown={closeIfBackground}
+    on:mousedown={() => {if (event.target.localName === 'dialog') dispatch("closePress")}}
     on:mouseup={mouseup}
     on:mouseleave={mouseup}
     on:mousemove={mousemove}>
     <main style={$$props.style} bind:this={mainElement}>
+
+      <!-- Title -->
       {#if title}
         <h2 on:mousedown={mousedown}>{title}</h2>
         {#if closeIcon}
-          <button class="dialogExit" on:click={close}>
+          <button class="dialogExit" on:click={() => dispatch("closePress")}>
             <Icon name="xmark"/>
           </button>
         {/if}
       {/if}
+
+      <!-- Slot -->
       <slot/>
+
     </main>
   </dialog>
 {/if}
@@ -124,7 +121,6 @@
     border-radius: var(--radius-lg);
     background-color: var(--color-bg);
     border: var(--border);
-    border-color: var(--color-border);
     transform: translate(0px, 0px);
   }
   h2 {

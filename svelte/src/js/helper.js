@@ -305,3 +305,10 @@ export function validMetric(metric) {
   return validM;
 }
 
+// Sort array of objects by a key
+export function sortArrayByObjKey(array, key) {
+  return array.sort((a, b) => {
+    const x = a[key]; const y = b[key];
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  });
+}

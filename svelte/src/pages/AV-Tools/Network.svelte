@@ -1,6 +1,6 @@
 <!-- Javascript -->
 <script>
-  import { router } from '../../js/global.js'
+  import { sortArrayByObjKey } from "../../js/helper.js"
 
   // Components
   import Icon from '../../components/Icon.svelte'
@@ -91,6 +91,20 @@
         'xxx.xxx.xxx.xxx',
         'xxx.xxx.xxx.xxx'
       ],
+    },
+    "setIpDialog": {
+      "value": {
+        "ip": "",
+        "mask": "",
+        "gateway": "",
+        "dns": ["", ""],
+      },
+      "placeholder": {
+        "ip": "192.168.1.2",
+        "mask": "255.255.255.0",
+        "gateway": "192.168.1.1",
+        "dns": ["192.168.1.1", "1.1.1.1"],
+      }
     },
     "presetSelected": {
       "name": "0",
@@ -209,8 +223,24 @@
     console.log("Interface selected changed to", event.target.value, selectedNic)
   }
   function actionNew() {
-    console.log("Open Popup to create a preset")
+    if (clientData.presetSelected.ipIsDhcp) {
+      clientData.setIpDialog.placeholder = {
+        "ip": clientData.nicSelected.ip,
+        "mask": clientData.nicSelected.mask,
+        "gateway": clientData.nicSelected.gateway,
+        "dns": clientData.nicSelected.dns,
+      }
+    }
+    else {
+      clientData.setIpDialog.placeholder = {
+        "ip": clientData.presetSelected.ip,
+        "mask": clientData.presetSelected.mask,
+        "gateway": clientData.presetSelected.gateway,
+        "dns": clientData.presetSelected.dns,
+      }
+    }
     clientData.showSetIP = true
+    console.log("Open Popup to create a preset with the values", clientData.setIpDialog.value)
   }
   function actionSet() {
     console.log("Set current preset as network settings", clientData.presetSelected)
@@ -222,16 +252,16 @@
     console.log("Remove preset from list", clientData.presetSelected)
   }
   function presetChange(preset) {
-    console.log("Selected preset changed to", preset)
     clientData.presetSelected = preset
+    console.log("Selected preset changed to", clientData.presetSelected)
   }
   function presetChangeToDHCP() {
-    console.log("Selected preset changed to DHCP")
     clientData.presetSelected = {
       "name": "DHCP",
       "ipIsDhcp": true,
       "dnsIsDhcp": true,
     }
+    console.log("Selected preset changed to DHCP", clientData.presetSelected)
   }
   function changePresetViewMode() {
     if (clientData.presetViewMode === "buttons") clientData.presetViewMode = "table"
@@ -258,13 +288,14 @@
 
   })
 
-  $: console.log(clientData.showSetIP)
+  // Debug
+  // $: console.log("clientData.setIpDialog.value", clientData.setIpDialog.value)
 
 </script>
 
 <!-- HTML -->
-<Dialog title="Set IP" show={clientData.showSetIP}>
-  <SetIP/>
+<Dialog title="Set IP" show={clientData.showSetIP} on:closePress={() => clientData.showSetIP = false}>
+  <SetIP data={clientData.setIpDialog}/>
 </Dialog>
 <article>
 
@@ -406,11 +437,11 @@
       {:else if clientData.presetViewMode === "table"}
         <div class="presetTable">
           <div>
-            <span>IP</span>
-            <span>Mask</span>
-            <span>Gateway</span>
-            <span>DNS1</span>
-            <span>DNS2</span>
+            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "ip")}>IP</button></span>
+            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "mask")}>Mask</button></span>
+            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "gateway")}>Gateway</button></span>
+            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "dns")}>DNS1</button></span>
+            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "dns")}>DNS2</button></span>
           </div>
           <button
             on:click={() => presetChangeToDHCP()}

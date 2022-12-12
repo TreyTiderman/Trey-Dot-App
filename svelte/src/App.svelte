@@ -54,7 +54,7 @@
     const urlPath = filePath.replace('./pages','').replace('.svelte','').toLocaleLowerCase()
     routes[urlPath] = wrap({asyncComponent: pagesGlob[filePath]})
     // navItems
-    const urlPathHash = filePath.replace('./pages','/#').replace('.svelte','').toLocaleLowerCase()
+    const urlPathHash = filePath.replace('./pages','./#').replace('.svelte','').toLocaleLowerCase()
     const filePathClean = filePath.replace('./pages/','').replace('.svelte','')
     const split = filePathClean.split('/')
     addToNavItems(navItems, split, urlPathHash)
