@@ -7,12 +7,33 @@
   // Exports
   export let showCRLF = true
   // export let hexSpaces = true
+  export let addTestData = true
   export let lines = [
     {
-      wasReceived: true,
+      wasReceived: false,
       timestampISO: '2022-10-16T21:05:38.425Z',
-      data: 'No data yet...',
-    }
+      data: '{"boolean": true, "string": "Yes", "number": 200}',
+    },
+    {
+      wasReceived: true,
+      timestampISO: '2022-10-16T21:05:38.447Z',
+      data: 'OFF',
+    },
+    {
+      wasReceived: false,
+      timestampISO: '2022-10-16T21:05:38.425Z',
+      data: '\x4f\x46\x46',
+    },
+    {
+      wasReceived: true,
+      timestampISO: '2022-10-16T21:05:38.536Z',
+      data: 'Weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee Weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!!!',
+    },
+    {
+      wasReceived: true,
+      timestampISO: '2022-10-16T21:05:38.543Z',
+      data: 'OK',
+    },
   ]
 
   // Variables
@@ -57,27 +78,26 @@
   $: if (showCRLF) escapeCRLF(lines)
   function escapeCRLF(lines) {
     lines.forEach(line => {
-      line.data = line.data.replace(/\r/g, "\\r")
-      line.data = line.data.replace(/\n/g, "\\n")
-      // delimiter = delimiter.replace(/\\x/g, "")
-      // delimiter = delimiter.replace(/0x/g, "")
+      line.data = String(line.data).replace(/\r/g, "\\r")
+      line.data = String(line.data).replace(/\n/g, "\\n")
     })
   }
-  // delimiter = delimiter.replace(/\\r/g, CR.ascii)
-  // delimiter = delimiter.replace(/\\n/g, LF.ascii)
-  // delimiter = delimiter.replace(/ /g, "")
-  // delimiter = delimiter.replace(/\\x/g, "")
-  // delimiter = delimiter.replace(/0x/g, "")
 
   // Test Received Data
-  // let testSends = false
-  // setInterval(() => {
-  //   if (testSends) {
-  //     lines.push({wasReceived: lines.length%4, timestampISO: new Date(Date.now()).toISOString(), data: lines.length * 89 * 53})
-  //     lines = lines
-  //   }
-  // }, 100)
-  // setInterval(() => testSends = !testSends , 6 * 1000 )
+  if (addTestData) {
+    let testSends = false
+    setInterval(() => {
+      if (testSends) {
+        lines.push({
+          wasReceived: lines.length%4,
+          timestampISO: new Date(Date.now()).toISOString(),
+          data: lines.length * 89 * 53,
+        })
+        lines = lines
+      }
+    }, 100)
+    setInterval(() => testSends = !testSends , 4 * 1000 )
+  }
 
 </script>
 
@@ -106,9 +126,13 @@
 
         <!-- Col1 -->
         {#if line.wasReceived}
-          <div class="terminal-col1"><Icon name="down-long" size=.8 style="display: inline;" color="var(--color-bg-blue)"/></div>
+          <div class="terminal-col1">
+            <Icon name="down-long" size=.8 style="display: inline;" color="var(--color-bg-blue)"/>
+          </div>
         {:else}
-          <div class="terminal-col1"><Icon name="up-long" size=.8 style="display: inline;" color="var(--color-bg-green)"/></div>
+          <div class="terminal-col1">
+            <Icon name="up-long" size=.8 style="display: inline;" color="var(--color-bg-green)"/>
+          </div>
         {/if}
 
         <!-- Col2 -->
@@ -141,8 +165,8 @@
   }
   .terminal {
     background-color: var(--color-bg);
-    border: var(--border);
-    border-color: var(--color-border);
+    /* border: var(--border); */
+    /* border-color: var(--color-border); */
     font-family: var(--font-mono);
     font-size: .8rem;
     display: grid;
@@ -154,14 +178,15 @@
   /* Header */
   .terminal-header {
     display: flex;
+    align-items: flex-start;
     color: var(--color-text);
     padding: var(--pad);
     border-bottom: var(--border);
-    border-color: var(--color-border);
     position: sticky;
     top: 0;
     background-color: var(--color-bg);
     z-index: 1;
+    max-height: 2.5rem;
   }
 
   /* Lines */
@@ -169,8 +194,8 @@
     padding: var(--pad);
     padding-top: var(--pad);
     padding-bottom: var(--pad);
-    height: 40vh;
-    max-height: 40vh;
+    min-height: 10rem;
+    /* max-height: 40vh; */
   }
   .terminal-line {
     display: flex;
@@ -203,37 +228,6 @@
     text-align: left;
     color: currentColor;
     border-radius: 0;
-  }
-  
-  /* Scroll Bar */
-  ::-webkit-scrollbar-thumb:vertical {
-    background: var(--color-bg-blue);
-    border-left: var(--border);
-    border-color: var(--color-border);
-  }
-  ::-webkit-scrollbar-thumb:horizontal {
-    background: var(--color-bg-green);
-    border-top: var(--border);
-    border-color: var(--color-border);
-  }
-  ::-webkit-scrollbar-track:vertical {
-    border-left: var(--border);
-    border-color: var(--color-border);
-  }
-  ::-webkit-scrollbar-track:horizontal {
-    border-top: var(--border);
-    border-color: var(--color-border);
-  }
-  ::-webkit-scrollbar-corner {
-    border-left: var(--border);
-    border-top: var(--border);
-    border-color: var(--color-border);
-  }
-  ::-webkit-resizer {
-    border-left: var(--border);
-    border-top: var(--border);
-    border-color: var(--color-border);
-    background: var(--color-bg-cyan);
   }
 
 </style>

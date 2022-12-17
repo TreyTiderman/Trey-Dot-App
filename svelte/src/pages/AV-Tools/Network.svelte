@@ -8,8 +8,8 @@
   import SetIP from '../../pages/AV-Tools/SetIP.svelte'
 
   // Data
-  let serverData = {
-    nics: [
+  let data = {
+    "nics": [
       {
         "name": "Fake NIC",
         "interfaceMetric": "xx",
@@ -69,10 +69,7 @@
           }
         ]
       }
-    ]
-}
-  let clientData = {
-    "showSetIP": false,
+    ],
     "nicSelected": {
       "name": "Fake NIC",
       "interfaceMetric": "xx",
@@ -92,7 +89,8 @@
         'xxx.xxx.xxx.xxx'
       ],
     },
-    "setIpDialog": {
+    "setIp": {
+      "show": false,
       "value": {
         "ip": "",
         "mask": "",
@@ -106,20 +104,30 @@
         "dns": ["192.168.1.1", "1.1.1.1"],
       }
     },
+    "presetDHCP": {
+      "name": "DHCP",
+      "ipIsDhcp": true,
+      "dnsIsDhcp": true,
+    },
     "presetSelected": {
-      "name": "0",
-      "ipIsDhcp": false,
-      "ip": "192.168.0.9",
-      "mask": "255.255.255.0",
-      "gateway": "192.168.0.1",
-      "dnsIsDhcp": false,
-      "dns": [
-        "192.168.0.1",
-        "1.1.1.1"
-      ]
+      "name": "DHCP",
+      "ipIsDhcp": true,
+      "dnsIsDhcp": true,
     },
     "presetViewMode": "buttons",
     "presets": [
+      {
+        "name": "00",
+        "ipIsDhcp": false,
+        "ip": "192.168.0.9",
+        "mask": "255.255.0.0",
+        "gateway": "192.168.0.1",
+        "dnsIsDhcp": false,
+        "dns": [
+          "192.168.0.1",
+          "1.1.1.1"
+        ]
+      },
       {
         "name": "0",
         "ipIsDhcp": false,
@@ -169,18 +177,6 @@
         ]
       },
       {
-        "name": "4",
-        "ipIsDhcp": false,
-        "ip": "192.168.1.9",
-        "mask": "255.255.0.0",
-        "gateway": "192.168.0.1",
-        "dnsIsDhcp": false,
-        "dns": [
-          "192.168.0.1",
-          "1.1.1.1"
-        ]
-      },
-      {
         "name": "10",
         "ipIsDhcp": false,
         "ip": "10.0.0.9",
@@ -218,56 +214,104 @@
 
   // Functions
   function interfaceChange(event) {
-    const selectedNic = serverData.nics.find(nic => nic.name === event.target.value)
-    clientData.nicSelected = selectedNic
-    console.log("Interface selected changed to", event.target.value, selectedNic)
+    const selectValue = event.target.value
+    data.nicSelected = data.nics.find(nic => nic.name === selectValue)
+    console.log("Interface selected changed to", selectValue, data.nicSelected)
   }
-  function actionNew() {
-    if (clientData.presetSelected.ipIsDhcp) {
-      clientData.setIpDialog.placeholder = {
-        "ip": clientData.nicSelected.ip,
-        "mask": clientData.nicSelected.mask,
-        "gateway": clientData.nicSelected.gateway,
-        "dns": clientData.nicSelected.dns,
+  function presetActionNew() {
+    // Set the placeholders of the SetIP form to the selected nic
+    if (data.presetSelected.ipIsDhcp) {
+      data.setIp.placeholder = {
+        "ip": data.nicSelected.ip || "192.168.1.2",
+        "mask": data.nicSelected.mask || "255.255.255.0",
+        "gateway": data.nicSelected.gateway || "192.168.1.1",
       }
+      data.setIp.placeholder.dns = [
+        data.nicSelected.dns[0] || "192.168.1.1",
+        data.nicSelected.dns[1] || "1.1.1.1",
+      ]
+      console.log("Open Popup to create a preset with the selected interface as the placeholders", data.setIp.placeholder)
     }
+    // Set the placeholders of the SetIP form to the selected preset
     else {
-      clientData.setIpDialog.placeholder = {
-        "ip": clientData.presetSelected.ip,
-        "mask": clientData.presetSelected.mask,
-        "gateway": clientData.presetSelected.gateway,
-        "dns": clientData.presetSelected.dns,
+      data.setIp.placeholder = {
+        "ip": data.presetSelected.ip || "192.168.1.2",
+        "mask": data.presetSelected.mask || "255.255.255.0",
+        "gateway": data.presetSelected.gateway || "192.168.1.1",
       }
+      data.setIp.placeholder.dns = [
+        data.presetSelected.dns[0] || "192.168.1.1",
+        data.presetSelected.dns[1] || "1.1.1.1",
+      ]
+      console.log("Open Popup to create a preset with the selected preset as the placeholders", data.setIp.placeholder)
     }
-    clientData.showSetIP = true
-    console.log("Open Popup to create a preset with the values", clientData.setIpDialog.value)
+    // Show the SetIP form
+    data.setIp.show = true
   }
-  function actionSet() {
-    console.log("Set current preset as network settings", clientData.presetSelected)
+  function presetActionSet() {
+    console.log("Set selected preset as network settings", data.presetSelected)
   }
-  function actionAdd() {
-    console.log("Add current preset to network settings", clientData.presetSelected)
+  function presetActionAdd() {
+    console.log("Add selected preset to network settings", data.presetSelected)
   }
-  function actionRemove() {
-    console.log("Remove preset from list", clientData.presetSelected)
+  function presetActionRemove() {
+    data.presets = data.presets.filter(preset => preset.name !== data.presetSelected.name)
+    data.presetSelected = data.presetDHCP
+    savePresetsToLocalStorage()
+    console.log("Remove selected preset from list", data.presetSelected)
+  }
+  function setIp_save(event) {
+    const preset = JSON.parse(JSON.stringify(event.detail));
+    preset.name = Date.now()
+    preset.ipIsDhcp = false
+    preset.dnsIsDhcp = false
+    data.presets = [...data.presets, preset]
+    data.setIp.show = false
+    savePresetsToLocalStorage()
+    console.log("SetIP popup saved new preset", preset)
+  }
+  function setIp_set(event) {
+    const preset = {...event.detail, name: Date.now()}
+    data.setIp.show = false
+    console.log("SetIP popup set these settings", preset)
   }
   function presetChange(preset) {
-    clientData.presetSelected = preset
-    console.log("Selected preset changed to", clientData.presetSelected)
+    data.presetSelected = preset
+    console.log("Selected preset changed to", data.presetSelected)
   }
   function presetChangeToDHCP() {
-    clientData.presetSelected = {
-      "name": "DHCP",
-      "ipIsDhcp": true,
-      "dnsIsDhcp": true,
-    }
-    console.log("Selected preset changed to DHCP", clientData.presetSelected)
+    data.presetSelected = data.presetDHCP
+    console.log("Selected preset changed to DHCP", data.presetSelected)
   }
   function changePresetViewMode() {
-    if (clientData.presetViewMode === "buttons") clientData.presetViewMode = "table"
-    else if (clientData.presetViewMode === "table") clientData.presetViewMode = "buttons"
-    else clientData.presetViewMode = "table"
-    console.log("Preset View Mode Changed to", clientData.presetViewMode)
+    if (data.presetViewMode === "buttons") data.presetViewMode = "table"
+    else if (data.presetViewMode === "table") data.presetViewMode = "buttons"
+    else data.presetViewMode = "table"
+    console.log("Preset View Mode Changed to", data.presetViewMode)
+  }
+  function sortBy(key) {
+    data.presets = sortArrayByObjKey(data.presets, key)
+    savePresetsToLocalStorage()
+  }
+  function getPresetsFromLocalStorage() {
+    const networkPresetsLS = localStorage.getItem("networkPresets")
+    if (networkPresetsLS === null || networkPresetsLS === "") {
+      console.log("No presets in local storage. Using the default presets")
+      return
+    }
+    const presets = JSON.parse(networkPresetsLS)
+    if (presets.length === 0) {
+      console.log("No presets in local storage. Using the default presets")
+    }
+    else {
+      data.presets = presets
+      console.log("Retrieved presets from local storage")
+      console.table(presets)
+    }
+  }
+  function savePresetsToLocalStorage() {
+    localStorage.setItem("networkPresets", JSON.stringify(data.presets))
+    console.log("Presets saved to local storage", data.presets)
   }
 
   // Component Startup
@@ -275,12 +319,12 @@
   let doneLoading = false
   onMount(async () => {
 
-    // If the width of the screen is greater than 1200 show the presets in table form
-    clientData.nicSelected = serverData.nics[0]
+    // Get the presets the client has saved in local storage
+    getPresetsFromLocalStorage()
 
     // If the width of the screen is greater than 1200 show the presets in table form
     if (document.documentElement.offsetWidth > 1200) {
-      clientData.presetViewMode = "table"
+      data.presetViewMode = "table"
     }
 
     // Startup complete
@@ -288,14 +332,11 @@
 
   })
 
-  // Debug
-  // $: console.log("clientData.setIpDialog.value", clientData.setIpDialog.value)
-
 </script>
 
 <!-- HTML -->
-<Dialog title="Set IP" show={clientData.showSetIP} on:closePress={() => clientData.showSetIP = false}>
-  <SetIP data={clientData.setIpDialog}/>
+<Dialog title="Create Network Preset" show={data.setIp.show} on:close={() => data.setIp.show = false}>
+  <SetIP data={data.setIp} on:save={setIp_save} on:set={setIp_set}/>
 </Dialog>
 <article>
 
@@ -305,9 +346,10 @@
 
     <!-- NIC Select -->
     <label>
-      Select Interface <br>
-      <select on:input={interfaceChange}>
-        {#each serverData.nics as nic }
+      Interface <br>
+      <!-- svelte-ignore a11y-autofocus -->
+      <select on:input={interfaceChange} autofocus>
+        {#each data.nics as nic}
           <option>{nic.name}</option>
         {/each}
       </select>
@@ -315,18 +357,18 @@
 
     <!-- NIC Info -->
     <div class="nicInfo">
-      <h3>{clientData.nicSelected.ip}</h3>
+      <h3>{data.nicSelected.ip}</h3>
       <div>
         <div>Mask:</div>
-        <div>{clientData.nicSelected.mask}</div>
+        <div>{data.nicSelected.mask}</div>
       </div>
       <div>
         <div>Gate:</div>
-        <div>{clientData.nicSelected.gateway}</div>
+        <div>{data.nicSelected.gateway}</div>
       </div>
       <br>
-      {#if clientData.nicSelected.ipsAdded.length > 0}
-        {#each  clientData.nicSelected.ipsAdded as ipAdd}
+      {#if data.nicSelected.ipsAdded.length > 0}
+        {#each  data.nicSelected.ipsAdded as ipAdd}
           <div class="flex bright">
             <div>+ IP:</div>
             <div>{ipAdd.ip}</div>
@@ -338,8 +380,8 @@
           <br>
         {/each}
       {/if}
-      {#if clientData.nicSelected.dns.length > 0}
-        {#each clientData.nicSelected.dns as dns, i}
+      {#if data.nicSelected.dns.length > 0}
+        {#each data.nicSelected.dns as dns, i}
           <div>
             <div>DNS{i+1}:</div>
             <div>{dns}</div>
@@ -349,11 +391,11 @@
       <br>
       <div>
         <div>DHCP:</div>
-        <div>{clientData.nicSelected.ipIsDhcp}</div>
+        <div>{data.nicSelected.ipIsDhcp}</div>
       </div>
       <div>
         <div>Metric:</div>
-        <div>{clientData.nicSelected.interfaceMetric}</div>
+        <div>{data.nicSelected.interfaceMetric}</div>
       </div>
     </div>
 
@@ -363,96 +405,115 @@
   <section class="grid">
 
     <!-- Preset Actions -->
-    <div class="actions">
-      <h2>Preset Actions</h2>
-      <div class="actionButtons">
-        <button on:click={actionNew} class="cyan">
-          New 
-          <Icon name="square-plus" size=1/>
-        </button>
-        <button on:click={actionSet} class="green">
-          Set 
-          <Icon name="check" size=1/>
-        </button>
-        <button on:click={actionAdd} class="yellow">
-          Add 
-          <Icon name="plus" size=1/>
-        </button>
-        <button on:click={actionRemove} class="red">
-          Remove
-          <Icon name="trash" size=1/>
-        </button>
-      </div>
+    <h2>Preset Actions</h2>
+    <div class="flex">
+      <button on:click={presetActionNew} class="flex cyan">
+        New 
+        <Icon name="square-plus" size=1/>
+      </button>
+      <button on:click={presetActionSet} class="flex green">
+        Set 
+        <Icon name="check" size=1/>
+      </button>
+      <button on:click={presetActionAdd} class="flex yellow">
+        Add 
+        <Icon name="plus" size=1/>
+      </button>
+      <button on:click={presetActionRemove} class="flex red">
+        Remove
+        <Icon name="trash" size=1/>
+      </button>
     </div>
 
     <!-- Presets -->
-    <div class="presets">
-      <h2>
-        <button on:click={changePresetViewMode}>
-          Select Preset
-          <Icon name="arrows-rotate" size=.8 style="display: inline;" color="var(--color-text-dim)"/>
+    <h2>
+      <button on:click={changePresetViewMode}>
+        Select Preset
+        <Icon name="arrows-rotate" size=.8 inline color="var(--color-text-dim)"/>
+      </button>
+    </h2>
+    
+    <!-- Preset Buttons View -->
+    {#if data.presetViewMode === "buttons"}
+      <div class="presetButtons">
+        <button
+          on:click={() => presetChangeToDHCP()}
+          class={"DHCP" === data.presetSelected.name ? "presetSelected" : ""}
+        >
+          <h3>DHCP</h3>
+          <span>Request an address</span>
+          {#if "DHCP" === data.presetSelected.name}              
+            <div class="checkmark">
+              <Icon name="check"/>
+            </div>
+          {/if}
         </button>
-      </h2>
-      
-      <!-- Preset Buttons View -->
-      {#if clientData.presetViewMode === "buttons"}
-        <div class="presetButtons">
+        {#each data.presets as preset}
           <button
-            on:click={() => presetChangeToDHCP()}
-            class={"DHCP" === clientData.presetSelected.name ? "presetSelected" : ""}
+            on:click={() => presetChange(preset)}
+            class={preset.name === data.presetSelected.name ? "presetSelected" : ""}
           >
-            <h3>DHCP</h3>
-            <span>Request an address</span>
-            {#if "DHCP" === clientData.presetSelected.name}              
+            <h3>{preset.ip}</h3>
+            <span>Mask: {preset.mask}</span>
+            {#if preset.gateway}
+              <span>Gate: {preset.gateway}</span>
+            {/if}
+            {#if preset.dns.length > 0}
+              {#each preset.dns as dns, i}
+                {#if preset.dns[i]}
+                  <div>DNS{i+1}: {dns}</div>
+                {/if}
+              {/each}
+            {/if}
+            {#if preset.name === data.presetSelected.name}              
               <div class="checkmark">
                 <Icon name="check"/>
               </div>
             {/if}
           </button>
-          {#each clientData.presets as preset}
-            <button
-              on:click={() => presetChange(preset)}
-              class={preset.name === clientData.presetSelected.name ? "presetSelected" : ""}
-            >
-              <h3>{preset.ip}</h3>
-              <span>Mask: {preset.mask}</span>
-              {#if preset.gateway}
-                <span>Gate: {preset.gateway}</span>
-              {/if}
-              {#if preset.dns.length > 0}
-                {#each preset.dns as dns, i}
-                  <div>DNS{i+1}: {dns}</div>
-                {/each}
-              {/if}
-              {#if preset.name === clientData.presetSelected.name}              
-                <div class="checkmark">
-                  <Icon name="check"/>
-                </div>
-              {/if}
-            </button>
-          {/each}
-        </div>
+        {/each}
+      </div>
 
-      <!-- Preset Table View -->
-      {:else if clientData.presetViewMode === "table"}
-        <div class="presetTable">
-          <div>
-            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "ip")}>IP</button></span>
-            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "mask")}>Mask</button></span>
-            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "gateway")}>Gateway</button></span>
-            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "dns")}>DNS1</button></span>
-            <span><button on:click={() => clientData.presets = sortArrayByObjKey(clientData.presets, "dns")}>DNS2</button></span>
-          </div>
+    <!-- Preset Table View -->
+    {:else if data.presetViewMode === "table"}
+      <div class="presetTable">
+        <div>
+          <span><button on:click={() => sortBy("ip")}>IP</button></span>
+          <span><button on:click={() => sortBy("mask")}>Mask</button></span>
+          <span><button on:click={() => sortBy("gateway")}>Gateway</button></span>
+          <span><button on:click={() => sortBy("dns")}>DNS1</button></span>
+          <span><button on:click={() => sortBy("dns")}>DNS2</button></span>
+        </div>
+        <button
+          on:click={() => presetChangeToDHCP()}
+          class={"DHCP" === data.presetSelected.name ? "presetSelected" : ""}
+        >
+          <span>DHCP</span>
+          <span>-</span>
+          <span>-</span>
+          <span>-</span>
+          <span>-</span>
+          {#if "DHCP" === data.presetSelected.name}              
+            <div class="checkmark">
+              <Icon name="square-check"/>
+            </div>
+          {:else}
+            <div class="checkmark">
+              <Icon name="square-outline"/>
+            </div>
+          {/if}
+        </button>
+        {#each data.presets as preset}
           <button
-            on:click={() => presetChangeToDHCP()}
-            class={"DHCP" === clientData.presetSelected.name ? "presetSelected" : ""}
+            on:click={() => presetChange(preset)}
+            class={preset.name === data.presetSelected.name ? "presetSelected" : ""}
           >
-            <span>DHCP</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            {#if "DHCP" === clientData.presetSelected.name}              
+            <span>{preset.ip}</span>
+            <span>{preset.mask}</span>
+            <span>{preset.gateway || "-"}</span>
+            <span>{preset.dns[0] || "-"}</span>
+            <span>{preset.dns[1] || "-"}</span>
+            {#if preset.name === data.presetSelected.name}              
               <div class="checkmark">
                 <Icon name="square-check"/>
               </div>
@@ -462,32 +523,9 @@
               </div>
             {/if}
           </button>
-          {#each clientData.presets as preset}
-            <button
-              on:click={() => presetChange(preset)}
-              class={preset.name === clientData.presetSelected.name ? "presetSelected" : ""}
-            >
-              <span>{preset.ip}</span>
-              <span>{preset.mask}</span>
-              <span>{preset.gateway || "-"}</span>
-              <span>{preset.dns[0] || "-"}</span>
-              <span>{preset.dns[1] || "-"}</span>
-              {#if preset.name === clientData.presetSelected.name}              
-                <div class="checkmark">
-                  <Icon name="square-check"/>
-                </div>
-              {:else}
-                <div class="checkmark">
-                  <Icon name="square-outline"/>
-                </div>
-              {/if}
-            </button>
-          {/each}
-        </div>
-
-      {/if}
-
-    </div>
+        {/each}
+      </div>
+    {/if}
 
   </section>
 
@@ -503,7 +541,7 @@
     display: flex;
   }
   aside {
-    min-width: 300px;
+    min-width: 15rem;
     padding: var(--gap);
     border-right: var(--border);
     border-color: var(--color-border-section);
@@ -531,7 +569,6 @@
     align-content: flex-start;
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    /* gap: var(--pad); */
   }
   .nicInfo div.bright {
     color: var(--color-text-bright);
@@ -541,30 +578,7 @@
     gap: var(--pad);
   }
 
-  /* Prest Actions */
-  .actions {
-    display: grid;
-    align-content: flex-start;
-    gap: var(--pad);
-  }
-  .actionButtons {
-    display: flex;
-    align-items: center;
-    gap: var(--pad);
-    flex-wrap: wrap;
-  }
-  .actionButtons button {
-    display: flex;
-    align-items: center;
-    gap: var(--pad);
-  }
-
   /* Presets */
-  .presets {
-    display: grid;
-    align-content: flex-start;
-    gap: var(--pad);
-  }
   h2 button {
     display: flex;
     gap: var(--pad);
@@ -580,7 +594,7 @@
     font-family: var(--font-mono);
     font-size: 0.9rem;
     flex-wrap: wrap;
-    /* max-width: 69rem; */
+    overflow: auto;
   }
   .presetButtons button {
     width: 250px;
@@ -591,6 +605,25 @@
     background-color: var(--color-bg-section);
     color: var(--color-text-dim);
     position: relative;
+  }
+  .presetButtons .presetSelected {
+    color: var(--color-text-purple);
+    background-color: var(--color-bg-purple);
+    
+    color: var(--color-text-input);
+    background-color: var(--color-bg-input);
+  }
+  .presetButtons .presetSelected span:first-child {
+    color: var(--color-text-purple);
+    color: var(--color-text-bright);
+  }
+  .presetButtons .presetSelected .checkmark {
+    position: absolute;
+    top: var(--pad);
+    right: var(--pad);
+    color: var(--color-text-purple);
+    color: var(--color-text-bright);
+    font-size: 1.2rem;
   }
 
   /* Preset Table */
@@ -610,32 +643,27 @@
     color: var(--color-text);
     width: fit-content;
   }
-  .presetTable > div {
+  .presetTable > div:first-child {
     display: flex;
     gap: var(--gap);
     position: relative;
     background-color: var(--color-bg);
     width: fit-content;
     color: var(--color-text-bright);
-    padding: var(--pad);
+    padding-bottom  : .25rem;
     border-bottom: var(--border);
     margin-bottom: .25rem;
+    padding-right: 2rem;
+
+    z-index: 1;
+    position: sticky;
+    top: 0;
   }
   .presetTable * span:nth-child(1) {
-    width: 7.4rem;
     margin-left: 2rem;
   }
-  .presetTable * span:nth-child(2) {
-    width: 7.4rem;
-  }
-  .presetTable * span:nth-child(3) {
-    width: 7.4rem;
-  }
-  .presetTable * span:nth-child(4) {
-    width: 7.4rem;
-  }
-  .presetTable * span:nth-child(5) {
-    width: 7.4rem;
+  .presetTable * span {
+    width: 8rem;
   }
   .presetTable .presetSelected {
     color: var(--color-text-input);
@@ -664,27 +692,6 @@
     .presetTable .presetSelected:hover {
       background-color: var(--color-bg-input);
     }
-  }
-
-  /* Selected */
-  .presetButtons .presetSelected {
-    color: var(--color-text-purple);
-    background-color: var(--color-bg-purple);
-    
-    color: var(--color-text-input);
-    background-color: var(--color-bg-input);
-  }
-  .presetButtons .presetSelected span:first-child {
-    color: var(--color-text-purple);
-    color: var(--color-text-bright);
-  }
-  .presetButtons .presetSelected .checkmark {
-    position: absolute;
-    top: var(--pad);
-    right: var(--pad);
-    color: var(--color-text-purple);
-    color: var(--color-text-bright);
-    font-size: 1.2rem;
   }
 
 </style>

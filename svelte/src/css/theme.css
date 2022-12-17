@@ -21,7 +21,7 @@ html {
 
   --color-text: var(--color-grey-700);
   --color-text-bright: var(--color-grey-950);
-  --color-text-dim: var(--color-grey-400);
+  --color-text-dim: var(--color-grey-500);
   --color-text-link: var(--color-blue-600);
   
   --color-bg-input: var(--color-grey-300);

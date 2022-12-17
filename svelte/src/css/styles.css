@@ -417,6 +417,7 @@ button:active {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-bg-header);
+  background: var(--color-border);
 }
 ::-webkit-scrollbar-track {
   background: transparent;

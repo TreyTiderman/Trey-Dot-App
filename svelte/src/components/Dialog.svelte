@@ -58,7 +58,7 @@
 <!-- HTML -->
 {#if show}
   <dialog
-    on:mousedown={() => {if (event.target.localName === 'dialog') dispatch("closePress")}}
+    on:mousedown={() => {if (event.target.localName === 'dialog') dispatch("close")}}
     on:mouseup={mouseup}
     on:mouseleave={mouseup}
     on:mousemove={mousemove}>
@@ -68,7 +68,7 @@
       {#if title}
         <h2 on:mousedown={mousedown}>{title}</h2>
         {#if closeIcon}
-          <button class="dialogExit" on:click={() => dispatch("closePress")}>
+          <button class="dialogExit" on:click={() => dispatch("close")}>
             <Icon name="xmark"/>
           </button>
         {/if}

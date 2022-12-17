@@ -1,44 +1,5 @@
 <!-- Javascript -->
 <script>
-  import { get, post } from "../../js/helper.js"
-
-  // Components
-  import Icon from '../../components/Icon.svelte'
-  import Terminal from './Terminal.svelte'
-
-  // Component Startup
-  import { onMount } from 'svelte';
-  let availablePorts = []
-  let port = { isOpen: false }
-  let doneLoading = false
-  onMount(async () => {
-
-    // Available ports
-    // const availablePortsResponse = await get("/api/serial/v1/availablePorts", "http://192.168.1.9:4620")
-    // const availablePortsResponse = await get("/api/serial/v1/availablePorts")
-    // Remove ports that don't have a serial number
-    availablePortsResponse.forEach(port => {
-      if (port.serialNumber !== undefined) availablePorts = [...availablePorts, port];
-    })
-    // Set the device select to the first available port
-    if (availablePorts.length > 0) devicePath = availablePorts[0].path
-
-    // Device info
-    if (availablePorts.length > 0) {
-      const body = { "path": devicePath }
-      // port = await post("/api/serial/v1/port", body, "http://192.168.1.9:4620")
-      // port = await post("/api/serial/v1/port", body)
-      setInterval(async () => {
-        const body = { "path": devicePath }
-        // port = await post("/api/serial/v1/port", body, "http://192.168.1.9:4620")
-        // port = await post("/api/serial/v1/port", body)
-      }, 1 * 1000)
-    }
-
-    // Startup complete
-    doneLoading = true
-
-  })
 
   // Connection Settings
   const baudRates = [9600, 14400, 19200, 38400, 57600, 115200]
@@ -46,13 +7,85 @@
   let baudRate
   let expectedDelimiter = "\\r\\n"
   let encodingMode = "ascii"
-  // let settings = {
-  //   devicePath,
-  //   baudRate: 9600,
-  //   expectedDelimiter: "\\r\\n",
-  //   encodingMode: "ascii",
-  //   connectionIsOpen: false,
-  // }
+
+  // Sending
+  let send1 = "ka 01 01\\r"
+  let send2 = "ka 01 00\\r"
+  let send3 = "mc 01 02\\r"
+
+  let availablePorts = []
+  let port = { isOpen: false }
+
+
+  import { get, post } from "../../js/helper.js"
+
+  // Components
+  import Icon from '../../components/Icon.svelte'
+  import Terminal from './Terminal.svelte'
+  
+  // Data
+  let data = {
+    baudRates: [9600, 14400, 19200, 38400, 57600, 115200],
+    serialports: [
+      {
+        path: "COM3",
+      },
+      {
+        path: "COM4",
+      },
+    ],
+    serialportSelected: {
+      path: "COM3",
+      isOpen: false,
+      baudRate: 9600,
+      delimiter: "\r\n",
+      tx: [],
+      txFail: [],
+      rx: [],
+      rxRaw: [],
+      error: null,
+      portObj: "for server use only"
+    },
+    settings: {
+      devicePath: "COM3",
+      baudRate: 9600,
+      expectedDelimiter: "\\r\\n",
+      encodingMode: "ascii",
+      isOpen: false,
+      placeholder: {
+        baudRate: 9600,
+        expectedDelimiter: "\\r\\n",
+      },
+    },
+    lines: [
+      {
+        wasReceived: true,
+        timestampISO: '2022-10-16T21:05:38.425Z',
+        data: 'No data yet...',
+      },
+    ],
+    sends: [
+      {
+        value: "ka 01 01\\r",
+        placeholder: "ka 01 01\\r",
+      },
+      {
+        value: "ka 01 00\\r",
+        placeholder: "\xAA\x11\xFE\x01\x01\x11",
+      },
+      {
+        value: "mc 01 02\\r",
+        placeholder: "\x01\x30\x41\x30\x41\x30\x43\x02\x43\x32\x30\x33\x44\x36\x30\x30\x30\x31\x03\x73\x0D",
+      },
+    ],
+  }
+
+  // Functions
+  function interfaceChange(event) {
+    const selectValue = event.target.value
+    data.nicSelected = data.nics.find(nic => nic.name === selectValue)
+    console.log("Interface selected changed to", selectValue, data.nicSelected)
+  }
   async function openConnection(path, baudRate, delimiter) {
     const body = {
       "path": path,
@@ -71,11 +104,6 @@
     if (port.isOpen) closeConnection(devicePath)
     else openConnection(devicePath, baudRate, expectedDelimiter)
   }
-
-  // Sending
-  let send1 = "ka 01 01\\r"
-  let send2 = "ka 01 00\\r"
-  let send3 = "mc 01 02\\r"
   async function sendClick(text) {
     const body = {
       "path": devicePath,
@@ -87,10 +115,6 @@
     // const sendResponse = await post("/api/serial/v1/send", body, "http://192.168.1.9:4620")
     // const sendResponse = await post("/api/serial/v1/send", body)
   }
-  
-  // Terminal lines
-  let lines
-  $: updateLineData(port, encodingMode)
   function updateLineData(port, encodingMode) {
     if (port?.data) {
       let linesFromServer = []
@@ -120,8 +144,48 @@
     }
   }
 
+  // Terminal lines
+  let lines
+  $: updateLineData(port, encodingMode)
+
+  // Component Startup
+  import { onMount } from 'svelte';
+  let doneLoading = false
+  onMount(async () => {
+
+    // Is Online
+    // const time = await get("/api/time")
+    // console.log(time)
+
+    // Available ports
+    // const availablePortsResponse = await get("/api/serial/v1/availablePorts", "http://192.168.1.9:4620")
+    // const availablePortsResponse = await get("/api/serial/v1/availablePorts")
+    // Remove ports that don't have a serial number
+    // availablePortsResponse.forEach(port => {
+    //   if (port.serialNumber !== undefined) availablePorts = [...availablePorts, port];
+    // })
+    // Set the device select to the first available port
+    // if (availablePorts.length > 0) devicePath = availablePorts[0].path
+
+    // Device info
+    // if (availablePorts.length > 0) {
+    //   const body = { "path": devicePath }
+    //   port = await post("/api/serial/v1/port", body, "http://192.168.1.9:4620")
+    //   port = await post("/api/serial/v1/port", body)
+    //   setInterval(async () => {
+    //     const body = { "path": devicePath }
+    //     port = await post("/api/serial/v1/port", body, "http://192.168.1.9:4620")
+    //     port = await post("/api/serial/v1/port", body)
+    //   }, 1 * 1000)
+    // }
+
+    // Startup complete
+    doneLoading = true
+
+  })
+
   // Debug
-  $: console.log("port", port)
+  // $: console.log("port", port)
   // $: console.log("lines", lines)
 
 </script>
@@ -132,83 +196,70 @@
   <!-- Connection Settings -->
   <aside class="grid">
     <h2>Connection Settings</h2>
-    {#if availablePorts.length === 0 && doneLoading}
-      <div>
-        <Icon name="circle-exclamation" size=1 color="var(--color-bg-red)"/>
-        <span style="color: var(--color-bg-red);">Plugin a USB serial device to get started</span>
+    <label>
+      Device<br>
+      <!-- svelte-ignore a11y-autofocus -->
+      <select on:input={interfaceChange} 
+        disabled={data.serialportSelected.isOpen} autofocus>
+        {#each data.serialports as port}
+          <option>{port.path}</option>
+        {/each}
+      </select>
+    </label>
+    <label>
+      Baud Rate<br>
+      <select bind:value={data.settings.baudRate} 
+        disabled={data.serialportSelected.isOpen}>
+        {#each data.baudRates as baudRate}
+          <option>{baudRate}</option>
+        {/each}
+      </select>
+    </label>
+    <label>
+      Expected Delimiter<br>
+      <input type="text" bind:value={data.settings.expectedDelimiter}
+        placeholder={data.settings.placeholder.expectedDelimiter}
+        disabled={data.serialportSelected.isOpen}>
+    </label>
+    <div>
+      Encoding Mode<br>
+      <div class="flex even">
+        <button class={data.settings.encodingMode === "ascii" ? "" : "dim"}
+          on:click={() => data.settings.encodingMode = "ascii"}
+          disabled={data.serialportSelected.isOpen}>
+          ASCII
+        </button>
+        <button class={data.settings.encodingMode === "hex" ? "" : "dim"}
+          on:click={() => data.settings.encodingMode = "hex"}
+          disabled={data.serialportSelected.isOpen}>
+          HEX
+        </button>
       </div>
-    {/if}
-    <div class="connection-options">
-      <label>
-        Device<br>
-        <select bind:value={devicePath}>
-          {#if availablePorts.length === 0 && doneLoading}
-            <option>COM1</option>
-            <option>COM3</option>
-            <option>/dev/ttyUSB0</option>
-          {/if}
-          {#each availablePorts as port}
-            <option>{port.path}</option>
-          {/each}
-        </select>
-      </label>
-      <label>
-        Baud Rate<br>
-        <select bind:value={baudRate}>
-          {#each baudRates as baudRate}
-            <option>{baudRate}</option>
-          {/each}
-        </select>
-      </label>
-      <label>
-        Expected Delimiter<br>
-        <input type="text" placeholder="\r\n" bind:value={expectedDelimiter}>
-      </label>
-      <div>
-        History<br>
-        <div class="connection-ascii-hex">
-          <button>Recall</button>
-          <button>Hide</button>
-        </div>
-      </div>
-      <div>
-        Encoding Mode<br>
-        <div class="connection-ascii-hex">
-          <button class="connection-ascii" style="{encodingMode === "hex" ? "background-color: var(--color-bg-section);" : "color: var(--color-text-bright);"}" on:click={() => encodingMode = "ascii"}>ASCII</button>
-          <button class="connection-hex" style="{encodingMode === "ascii" ? "background-color: var(--color-bg-section);" : "color: var(--color-text-bright);"}" on:click={() => encodingMode = "hex"}>HEX</button>
-        </div>
-      </div>
-      {#if port.isOpen}
-        <button class="connection-close" on:click={toggleConnectionClick}>Close</button>
-      {:else}
-        <button class="connection-open" on:click={toggleConnectionClick}>Open</button>
-      {/if}
     </div>
-    <div class="notes">
-      <div>Caridge Return (CR) = \r or \x0D</div>
-      <div>Line Feed (LF) = \n or \x0A</div>
+    {#if data.serialportSelected.isOpen}
+      <button class="red" on:click={toggleConnectionClick}>Close</button>
+    {:else}
+      <button class="green" on:click={toggleConnectionClick}>Open</button>
+    {/if}
+    <div>
+      <span class="dim">Carriage Return [CR] = \r or \x0D</span> <br>
+      <span class="dim">Line Feed [LF] = \n or \x0A</span>
     </div>
   </aside>
 
   <!-- Terminal -->
   <section class="grid">
     <h2>Terminal</h2>
-    <Terminal lines={lines}/>
+    <Terminal lines={data.lines} addTestData/>
 
     <!-- Sends -->
-    <div class="sends">
-      <div>
-        <input type="text" placeholder="fa 01 01\r" bind:value={send1}>
-        <button on:click={sendClick(send1)}>Send</button>
-      </div>
-      <div>
-        <input type="text" placeholder="\xAA\x11\xFE\x01\x01\x11" bind:value={send2}>
-        <button on:click={sendClick(send2)}>Send</button>
-      </div>
-      <div>
-        <input type="text" placeholder="\x01\x30\x41\x30\x41\x30\x43\x02\x43\x32\x30\x33\x44\x36\x30\x30\x30\x31\x03\x73\x0D" bind:value={send3}>
-        <button on:click={sendClick(send3)}>Send</button>
-      </div>
+    <div class="grid">
+      {#each data.sends as send}        
+        <div class="flex nowrap">
+          <input type="text" placeholder={send.placeholder} bind:value={send.value}>
+          <button class="green" on:click={sendClick(send.value)}>Send</button>
+        </div>
+      {/each}
     </div>
   </section>
 
@@ -246,56 +297,9 @@
     }
   }
 
-  /* Connection Settings */
-  .connection-options {
-    display: grid;
-    gap: var(--gap);
-    max-width: 400px;
-  }
-  .connection-open {
-    color: var(--color-text-green);
-    background-color: var(--color-bg-green);
-  }
-  .connection-close {
-    color: var(--color-text-red);
-    background-color: var(--color-bg-red);
-  }
-  .connection-ascii-hex {
-    display: flex;
-    width: 100%;
-    gap: var(--gap);
-  }
-  .connection-ascii-hex > * {
-    flex: 1 0 0%;
-  }
-  .connection-hex,
-  .connection-ascii {
-    color: var(--color-text-dim);
-  }
-
-  /* Sends */
-  .sends {
-    display: grid;
-    gap: var(--gap);
-    width: 100%;
-  }
-  .sends div {
-    display: flex;
-    gap: var(--gap);
-  }
-  .sends div button {
-    background-color: var(--color-bg-green);
-    color: var(--color-text-green);
-  }
-  
-  .notes {
-    color: var(--color-text-dim);
-  }
-
   input,
   select {
     width: 100%;
   }
 
-  /* .hide {display: none;} */
 </style>

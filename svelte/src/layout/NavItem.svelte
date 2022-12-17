@@ -50,7 +50,7 @@
 <!-- Else add the navItem -->
 {:else if navItem?.name}
   <a on:click href={navItem.path} 
-    class:active={$location === navItem.path.slice(2)}
+    class:active={"./#" + $location === navItem.path}
     style={`padding-left: calc(var(--gap)*${indent});`}>
     <Icon name="{navItem.icon}" size={iconSize} />
     {navItem.name}
@@ -78,7 +78,7 @@
     align-items: center;
     gap: var(--gap);
   }
-  a.active {
+  .active {
     color: var(--color-text-input);
     background-color: var(--color-bg-input);
   }

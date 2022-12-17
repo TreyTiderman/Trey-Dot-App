@@ -2,9 +2,14 @@
 <script>
   import { validIPv4, validMask } from "../../js/helper.js"
 
+  // Event Dispatcher
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+
   // Import Components
   import Icon from '../../components/Icon.svelte'
 
+  // Data
   export let data = {
     value: {
       ip: "192.168.1.2",
@@ -57,7 +62,7 @@
       {/if}
     </label>
     <label>
-      Gateway <br>
+      Gateway <span class="dim">(optional)</span> <br>
       <input type="text"
         bind:value={data.value.gateway}
         on:keyup={event => { if (event.key === "p") data.value.gateway = data.placeholder.gateway }}
@@ -75,7 +80,7 @@
   <!-- Set DNS -->
   <div class="grid">
     <label>
-      DNS 1 <br>
+      DNS 1 <span class="dim">(optional)</span> <br>
       <input type="text"
         bind:value={data.value.dns[0]}
         on:keyup={event => { if (event.key === "p") data.value.dns[0] = data.placeholder.dns[0] }}
@@ -90,7 +95,7 @@
       {/if}
     </label>
     <label>
-      DNS 2 <br>
+      DNS 2 <span class="dim">(optional)</span> <br>
       <input type="text"
         bind:value={data.value.dns[1]}
         on:keyup={event => { if (event.key === "p") data.value.dns[1] = data.placeholder.dns[1] }}
@@ -103,41 +108,41 @@
         </div>
       {/if}
     </label>
-    <label>
+    <div>
       <br>
       <div class="buttons">
         <button class="green"
-          on:click={() => {
-            console.log("Set network settings", data.value)
-          }}
-          disabled={!(
-            validIPv4(data.value.ip) &&
-            validMask(data.value.mask) &&
-            validIPv4(data.value.gateway) &&
-            validIPv4(data.value.dns[0]) &&
-            validIPv4(data.value.dns[1])
-          )}
-        >
+          on:click={() => dispatch("set", data.value)}
+          disabled={
+            (
+                validIPv4(data.value.ip) &&
+                validMask(data.value.mask) &&
+                (validIPv4(data.value.gateway) || data.value.gateway === "") &&
+                (validIPv4(data.value.dns[0]) || data.value.dns[0] === "") &&
+                (validIPv4(data.value.dns[1]) || data.value.dns[1] === "")
+                ) === false
+              }
+          >
           Set 
           <Icon name="check" size=1/>
         </button>
         <button class="cyan"
-          on:click={() => {
-            console.log("Create a new preset", data.value)
-          }}
-          disabled={!(
-            validIPv4(data.value.ip) &&
-            validMask(data.value.mask) &&
-            validIPv4(data.value.gateway) &&
-            validIPv4(data.value.dns[0]) &&
-            validIPv4(data.value.dns[1])
-          )}
+          on:click={() => dispatch("save", data.value)}
+          disabled={
+            (
+              validIPv4(data.value.ip) &&
+              validMask(data.value.mask) &&
+              (validIPv4(data.value.gateway) || data.value.gateway === "") &&
+              (validIPv4(data.value.dns[0]) || data.value.dns[0] === "") &&
+              (validIPv4(data.value.dns[1]) || data.value.dns[1] === "")
+            ) === false
+          }
         >
           Save 
           <Icon name="square-plus" size=1/>
         </button>
       </div>
-    </label>
+    </div>
   </div>
 
 </article>
