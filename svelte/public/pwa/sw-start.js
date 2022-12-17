@@ -2,7 +2,7 @@
 
 // Service Worker
 if ('serviceWorker' in navigator) { // check compatability 
-  navigator.serviceWorker.register('./home/sw.js') // register
+  navigator.serviceWorker.register('./sw.js') // register
     .then((res) => {
         console.log('Service worker registered!'); // success
     })

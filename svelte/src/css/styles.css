@@ -366,6 +366,7 @@ details summary::-webkit-details-marker { display: none; }
 }
 :disabled:hover {
   filter: var(--filter-brightness-disable) grayscale(1);
+  cursor: not-allowed;
 }
 
 /* Text selection */

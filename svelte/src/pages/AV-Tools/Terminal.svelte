@@ -7,7 +7,7 @@
   // Exports
   export let showCRLF = true
   // export let hexSpaces = true
-  export let addTestData = true
+  export let addTestData = false
   export let lines = [
     {
       wasReceived: false,

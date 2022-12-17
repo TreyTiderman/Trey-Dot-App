@@ -347,8 +347,7 @@
     <!-- NIC Select -->
     <label>
       Interface <br>
-      <!-- svelte-ignore a11y-autofocus -->
-      <select on:input={interfaceChange} autofocus>
+      <select on:input={interfaceChange}>
         {#each data.nics as nic}
           <option>{nic.name}</option>
         {/each}

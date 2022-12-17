@@ -8,35 +8,15 @@
   
   // Data
   let data = {
-    baudRates: [9600, 14400, 19200, 38400, 57600, 115200],
-    serialports: [
-      {
-        path: "COM3",
-      },
-      {
-        path: "COM4",
-      },
-    ],
-    serialportSelected: {
-      path: "COM3",
-      isOpen: false,
-      baudRate: 9600,
-      delimiter: "\r\n",
-      tx: [],
-      txFail: [],
-      rx: [],
-      rxRaw: [],
-      error: null,
-      portObj: "for server use only"
-    },
+    isOpen: false,
     settings: {
-      devicePath: "COM3",
-      baudRate: 9600,
+      ip: "192.168.1.9",
+      port: 23,
       expectedDelimiter: "\\r\\n",
       encodingMode: "ascii",
-      isOpen: false,
       placeholder: {
-        baudRate: 9600,
+        ip: "192.168.1.9",
+        port: 23,
         expectedDelimiter: "\\r\\n",
       },
     },
@@ -84,8 +64,8 @@
     console.log("Close Connection", body)
   }
   async function toggleConnectionClick() {
-    if (data.serialportSelected.isOpen) closeConnection(data.serialportSelected.path)
-    else openConnection(data.settings.devicePath, data.settings.baudRate, data.settings.expectedDelimiter)
+    // if (data.isOpen) closeConnection(data.path)
+    // else openConnection(data.settings.devicePath, data.settings.baudRate, data.settings.expectedDelimiter)
   }
   async function sendClick(text) {
     const body = {
@@ -99,68 +79,42 @@
     console.log("Send", body)
   }
   function updateLineData(port, encodingMode) {
-    if (port?.data) {
-      let linesFromServer = []
-      // Add sends to the array
-      if (encodingMode === "hex") {        
-        port.data.forEach(data => {
-          if (data.error !== "") data.hex += " <- " + data.error
-          linesFromServer.push({
-            wasReceived: data.wasReceived,
-            timestampISO: data.timestampISO,
-            data: data.hex,
-          })
-        })
-      }
-      else {
-        port.data.forEach(data => {
-          if (data.error !== "") data.ascii += " <- " + data.error
-          linesFromServer.push({
-            wasReceived: data.wasReceived,
-            timestampISO: data.timestampISO,
-            data: data.ascii,
-          })
-        })
-      }
-      // Set lines equal to the info from the server
-      lines = linesFromServer
-    }
+    // if (port?.data) {
+    //   let linesFromServer = []
+    //   // Add sends to the array
+    //   if (encodingMode === "hex") {        
+    //     port.data.forEach(data => {
+    //       if (data.error !== "") data.hex += " <- " + data.error
+    //       linesFromServer.push({
+    //         wasReceived: data.wasReceived,
+    //         timestampISO: data.timestampISO,
+    //         data: data.hex,
+    //       })
+    //     })
+    //   }
+    //   else {
+    //     port.data.forEach(data => {
+    //       if (data.error !== "") data.ascii += " <- " + data.error
+    //       linesFromServer.push({
+    //         wasReceived: data.wasReceived,
+    //         timestampISO: data.timestampISO,
+    //         data: data.ascii,
+    //       })
+    //     })
+    //   }
+    //   // Set lines equal to the info from the server
+    //   lines = linesFromServer
+    // }
   }
 
   // Terminal lines
   let lines
-  $: updateLineData(data.settings.devicePath, data.settings.encodingMode)
+  // $: updateLineData(data.settings.devicePath, data.settings.encodingMode)
 
   // Component Startup
   import { onMount } from 'svelte';
   let doneLoading = false
   onMount(async () => {
-
-    // Is Online
-    // const time = await get("/api/time")
-    // console.log(time)
-
-    // Available ports
-    // const availablePortsResponse = await get("/api/serial/v1/availablePorts", "http://192.168.1.9:4620")
-    // const availablePortsResponse = await get("/api/serial/v1/availablePorts")
-    // Remove ports that don't have a serial number
-    // availablePortsResponse.forEach(port => {
-    //   if (port.serialNumber !== undefined) availablePorts = [...availablePorts, port];
-    // })
-    // Set the device select to the first available port
-    // if (availablePorts.length > 0) devicePath = availablePorts[0].path
-
-    // Device info
-    // if (availablePorts.length > 0) {
-    //   const body = { "path": devicePath }
-    //   port = await post("/api/serial/v1/port", body, "http://192.168.1.9:4620")
-    //   port = await post("/api/serial/v1/port", body)
-    //   setInterval(async () => {
-    //     const body = { "path": devicePath }
-    //     port = await post("/api/serial/v1/port", body, "http://192.168.1.9:4620")
-    //     port = await post("/api/serial/v1/port", body)
-    //   }, 1 * 1000)
-    // }
 
     // Startup complete
     doneLoading = true
@@ -180,45 +134,39 @@
   <aside class="grid">
     <h2>Connection Settings</h2>
     <label>
-      Device<br>
-      <select on:input={interfaceChange} 
-        disabled={data.serialportSelected.isOpen}>
-        {#each data.serialports as port}
-          <option>{port.path}</option>
-        {/each}
-      </select>
+      IP Address<br>
+      <input type="text" bind:value={data.settings.ip}
+        placeholder={data.settings.placeholder.ip}
+        disabled={data.isOpen}>
     </label>
     <label>
-      Baud Rate<br>
-      <select bind:value={data.settings.baudRate} 
-        disabled={data.serialportSelected.isOpen}>
-        {#each data.baudRates as baudRate}
-          <option>{baudRate}</option>
-        {/each}
-      </select>
+      Port<br>
+      <input type="text" bind:value={data.settings.port}
+        placeholder={data.settings.placeholder.port}
+        disabled={data.isOpen}>
     </label>
     <label>
       Expected Delimiter<br>
       <input type="text" bind:value={data.settings.expectedDelimiter}
         placeholder={data.settings.placeholder.expectedDelimiter}
-        disabled={data.serialportSelected.isOpen}>
+        disabled={data.isOpen}>
     </label>
     <div>
       Encoding Mode<br>
       <div class="flex even">
         <button class={data.settings.encodingMode === "ascii" ? "" : "dim"}
           on:click={() => data.settings.encodingMode = "ascii"}
-          disabled={data.serialportSelected.isOpen}>
+          disabled={data.isOpen}>
           ASCII
         </button>
         <button class={data.settings.encodingMode === "hex" ? "" : "dim"}
           on:click={() => data.settings.encodingMode = "hex"}
-          disabled={data.serialportSelected.isOpen}>
+          disabled={data.isOpen}>
           HEX
         </button>
       </div>
     </div>
-    {#if data.serialportSelected.isOpen}
+    {#if data.isOpen}
       <button class="red" on:click={toggleConnectionClick}>Close</button>
     {:else}
       <button class="green" on:click={toggleConnectionClick}>Open</button>

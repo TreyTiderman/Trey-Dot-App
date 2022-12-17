@@ -111,8 +111,7 @@
       <div class="flex even break-md">
         <label>
           Computer's static IP <br>
-          <!-- svelte-ignore a11y-autofocus -->
-          <input type="text" class="fill mono" autofocus
+          <input type="text" class="fill mono"
             class:error={!validIPv4(data.value.ip) && data.value.ip !== ""}
             on:keyup={event => { if (event.key === "p") data.value.ip = data.placeholder.ip }}
             bind:value={data.value.ip} placeholder={data.placeholder.ip}>
