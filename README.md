@@ -90,3 +90,7 @@ kill -9 <NODE_PROCESS>
 sudo netstat -lpn |grep :'6969'
 kill -9 1029825
 ```
+
+## Generate PWA Icons from a 512x512px PNG
+
+https://tools.crawlink.com/tools/pwa-icon-generator/

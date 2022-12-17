@@ -1,6 +1,6 @@
 {
-  "name": "Touch Panel",
-  "short_name": "TP",
+  "name": "trey.app",
+  "short_name": "trey.app",
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
