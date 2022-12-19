@@ -92,7 +92,7 @@
 <style>
   article {
     padding: var(--gap);
-    max-width: 800px;
+    max-width: 30rem;
     /* overflow: auto; */
     margin: auto;
     height: 100%;
